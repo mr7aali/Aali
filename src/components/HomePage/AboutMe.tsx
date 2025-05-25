@@ -1,6 +1,9 @@
+"use client";
+import { useEffect, useRef } from "react";
 import SectionTitle from "../SectionTitle";
+import { motion } from "framer-motion";
+import * as THREE from "three";
 
-/* eslint-disable react/no-unescaped-entities */
 const AboutMe = () => {
   const skills = [
     "Html5",
@@ -27,81 +30,206 @@ const AboutMe = () => {
     "Firebase",
     "MongoDB",
   ];
+
+  const canvasRef = useRef(null);
+
+  // Three.js setup
+  useEffect(() => {
+    if (!canvasRef.current) return;
+
+    // Scene, Camera, Renderer
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    );
+    const renderer = new THREE.WebGLRenderer({
+      canvas: canvasRef.current,
+      alpha: true,
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+
+    // Particles
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particleCount = 500;
+    const posArray = new Float32Array(particleCount * 3);
+
+    for (let i = 0; i < particleCount * 3; i++) {
+      posArray[i] = (Math.random() - 0.5) * 10;
+    }
+
+    particlesGeometry.setAttribute(
+      "position",
+      new THREE.BufferAttribute(posArray, 3)
+    );
+
+    const particleMaterial = new THREE.PointsMaterial({
+      size: 0.02,
+      color: 0x6b7280, // Gray color to match theme
+      transparent: true,
+      opacity: 0.6,
+    });
+
+    const particlesMesh = new THREE.Points(particlesGeometry, particleMaterial);
+    scene.add(particlesMesh);
+
+    camera.position.z = 5;
+
+    // Animation loop
+    const animate = () => {
+      requestAnimationFrame(animate);
+      particlesMesh.rotation.y += 0.002;
+      particlesMesh.rotation.x += 0.001;
+      renderer.render(scene, camera);
+    };
+    animate();
+
+    // Handle resize
+    const handleResize = () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    };
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      renderer.dispose();
+    };
+  }, []);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delay: 0.2,
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
+
+  const skillVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.3 } },
+    hover: { scale: 1.1, transition: { duration: 0.2 } },
+  };
+
   return (
-    // slate-100
-    <div id="ABOUT" className="bg-[#fafafa] px-5">
-      <div
-        // style={{ border: "1px solid red" }}
-        className="max-w-[1220px] mx-auto "
-      >
-        <div className="pt-10">
-          <SectionTitle title={"ABOUT ME"} />
-          {/* Header */}
-          <h1 className="text-center text-[50px] font-bold font-serif">
+    <div
+      id="ABOUT"
+      className="relative px-6 py-16 overflow-hidden bg-gradient-to-b from-gray-50 to-white md:px-10"
+    >
+      {/* Three.js Canvas */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 z-0"
+        style={{ opacity: 0.3 }}
+      />
+      <div className="relative z-10 mx-auto max-w-7xl">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+          className="text-center"
+        >
+          <SectionTitle title="ABOUT ME" />
+          <motion.h1
+            variants={itemVariants}
+            className="mt-4 font-serif text-4xl font-bold text-gray-800 md:text-5xl"
+          >
             About Me
-          </h1>
-          <p className="pt-5 text-[18px] px-5 lg:text-xl font-serif text-center opacity-70">
-            Here you will find more information about me, what I do, and my
-            current skills mostly in terms{" "}
-            <span className="hidden lg:block"></span> of programming and
-            technology
-          </p>
-        </div>
+          </motion.h1>
+          <motion.p
+            variants={itemVariants}
+            className="max-w-3xl mx-auto mt-6 font-serif text-lg leading-relaxed text-gray-600 md:text-xl"
+          >
+            Discover more about my journey, expertise, and the technologies I
+            work with to create impactful web solutions.
+          </motion.p>
+        </motion.div>
 
-        <div className="grid md:grid-cols-2 mt-20">
-          {/* hero  */}
-
-          <div className=" mb-5 md:mb-0">
-            <h1 className="mb-10 text-[35px] lg:text-[40px] font-serif text-center">
-              Get to know me!
-            </h1>
-            <p className="text-[14px] sm:text-[16px] text-justify lg:text-left lg:text-[18px] font-serif text-[#666] mb-6 leading-relaxed">
-              I'm a <strong>Frontend Web Developer</strong> building the
-              Front-end of Websites and Web Applications that leads to the
-              success of the overall product. Check out some of my work in the{" "}
-              <strong>Projects</strong> section.
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+          className="grid gap-12 mt-16 md:grid-cols-2"
+        >
+          {/* Get to Know Me Section */}
+          <motion.div variants={itemVariants} className="space-y-6">
+            <h2 className="font-serif text-3xl font-bold text-center text-gray-800 md:text-4xl md:text-left">
+              Get to Know Me
+            </h2>
+            <p className="font-serif text-base leading-relaxed text-justify text-gray-600 md:text-lg md:text-left">
+              I'm a{" "}
+              <strong className="text-indigo-600">
+                Frontend Web Developer
+              </strong>{" "}
+              passionate about crafting intuitive and dynamic user interfaces
+              for websites and web applications. Explore my work in the{" "}
+              <strong className="text-indigo-600">Projects</strong> section to
+              see how I contribute to successful digital products.
             </p>
-            <p className="text-[14px] sm:text-[16px] text-justify lg:text-left lg:text-[18px] font-serif text-[#666] mb-6 leading-relaxed">
-              I also like sharing content related to the stuff that I have
-              learned over the years in <strong>Web Development</strong> so it
-              can help other people of the Dev Community. Feel free to Connect
-              or Follow me on my{" "}
+            <p className="font-serif text-base leading-relaxed text-justify text-gray-600 md:text-lg md:text-left">
+              I enjoy sharing insights from my experience in{" "}
+              <strong className="text-indigo-600">Web Development</strong> to
+              support the developer community. Connect with me on{" "}
               <a
                 href="https://www.linkedin.com/in/mr7aali/"
                 target="_blank"
-                className="font-bold text-[#7843e9]"
+                rel="noopener noreferrer"
+                className="font-bold text-indigo-600 transition-colors hover:text-indigo-800"
               >
-                Linkedin
+                LinkedIn
               </a>{" "}
-              where I post useful content related to Web Development and
-              Programming
+              for valuable content on web development and programming.
             </p>
-            <p className="text-[14px] sm:text-[16px] text-justify lg:text-left lg:text-[18px] font-serif text-[#666] mb-6 leading-relaxed">
-              I'm open to <strong>Job</strong> opportunities where I can
-              contribute, learn and grow. If you have a good opportunity that
-              matches my skills and experience then don't hesitate to{" "}
-              <strong>contact</strong> me.
+            <p className="font-serif text-base leading-relaxed text-justify text-gray-600 md:text-lg md:text-left">
+              I'm always open to{" "}
+              <strong className="text-indigo-600">job opportunities</strong>{" "}
+              where I can contribute my skills, learn, and grow. Feel free to
+              reach out if you have an exciting role that aligns with my
+              expertise.
             </p>
-          </div>
+            <motion.a
+              href="#contact"
+              variants={itemVariants}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-block px-6 py-3 mt-4 font-semibold text-white transition-colors bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-700"
+            >
+              Contact Me
+            </motion.a>
+          </motion.div>
 
-          <div className="px-2">
-            <h1 className="mb-10 text-[35px text-[40px] font-serif text-center">
-              My Skills!
-            </h1>
-
-            <div className="flex flex-wrap justify-center">
-              {/* skills */}
+          {/* Skills Section */}
+          <motion.div variants={itemVariants} className="space-y-6">
+            <h2 className="font-serif text-3xl font-bold text-center text-gray-800 md:text-4xl md:text-left">
+              My Skills
+            </h2>
+            <div className="flex flex-wrap justify-center gap-3 md:justify-start">
               {skills.map((item, i) => (
-                <span
+                <motion.span
                   key={i}
-                  className="bg-[rgba(153,153,153,.2)] text-[14px] lg:text-[17px] px-3 py-2 sm:px-5 sm:py-3 m-1 rounded-lg font-bold  opacity-50 cursor-pointer"
+                  variants={skillVariants}
+                  whileHover="hover"
+                  className="px-4 py-2 text-sm font-semibold text-indigo-800 transition-shadow bg-indigo-100 rounded-full shadow-sm cursor-pointer md:text-base hover:shadow-md"
                 >
                   {item}
-                </span>
+                </motion.span>
               ))}
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   );
