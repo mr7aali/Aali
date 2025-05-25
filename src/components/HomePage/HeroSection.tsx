@@ -1,8 +1,7 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
-import { Typewriter } from "react-simple-typewriter";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 // Animation variants for smooth transitions
 const containerVariants = {
@@ -29,7 +28,7 @@ const cardVariants = {
   }),
   spread: (index: number) => ({
     opacity: 0.9,
-    x: index === 1 ? -280 : 280, // Left for card1, right for card2
+    x: index === 1 ? -280 : 280,
     y: 0,
     rotate: 0,
     transition: {
@@ -37,7 +36,7 @@ const cardVariants = {
       type: "spring",
       stiffness: 80,
       damping: 15,
-      delay: index === 1 ? 0 : 0.2, // Staggered animation
+      delay: index === 1 ? 0 : 0.2,
     },
   }),
   stacked: (index: number) => ({
@@ -63,7 +62,7 @@ const profileVariants = {
   },
   spread: {
     opacity: 1,
-    x: 0, // Profile picture stays centered
+    x: 0,
     y: 0,
     rotate: 0,
     transition: { duration: 0.6, type: "spring", stiffness: 80, damping: 15 },
@@ -79,6 +78,70 @@ const profileVariants = {
 
 const HeroSection: React.FC = () => {
   const [isSpread, setIsSpread] = useState<boolean>(false);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  // 2D canvas bubble effect
+  useEffect(() => {
+    if (!canvasRef.current) {
+      console.error("HeroSection: Canvas ref is not available");
+      return;
+    }
+    console.log("HeroSection: Canvas ref is available");
+
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) {
+      console.error("HeroSection: 2D context is not available");
+      return;
+    }
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const bubbles = Array.from({ length: 50 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: Math.random() * 20 + 10,
+      vx: (Math.random() - 0.5) * 2,
+      vy: -(Math.random() * 2 + 2), // Upward movement
+    }));
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "rgba(139, 91, 250, 0.7)"; // Indigo
+      ctx.globalCompositeOperation = "lighter";
+
+      bubbles.forEach((bubble) => {
+        ctx.beginPath();
+        ctx.arc(bubble.x, bubble.y, bubble.radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        bubble.x += bubble.vx;
+        bubble.y += bubble.vy;
+        bubble.x += Math.sin(Date.now() * 0.002 + bubble.x) * 0.5; // Wobble
+
+        if (bubble.y + bubble.radius < 0) {
+          bubble.y = canvas.height + bubble.radius;
+          bubble.x = Math.random() * canvas.width;
+        }
+      });
+
+      requestAnimationFrame(animate);
+    };
+    animate();
+    console.log("HeroSection: 2D animation loop started");
+
+    const handleResize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      console.log("HeroSection: 2D canvas cleanup completed");
+    };
+  }, []);
 
   const handleContainerHoverStart = (): void => {
     setIsSpread(true);
@@ -98,9 +161,14 @@ const HeroSection: React.FC = () => {
 
   return (
     <section className="relative flex items-center justify-center min-h-screen py-12 overflow-hidden bg-gradient-to-br from-indigo-50 via-white to-purple-50 sm:py-20">
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 z-[10] pointer-events-none"
+        style={{ opacity: 0.9 }}
+      />
       <motion.div
         id="if-i-hover-then-the-functionality-will-happanes"
-        className="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8"
+        className="relative z-10 max-w-5xl px-4 mx-auto sm:px-6 lg:px-8"
         onHoverStart={handleContainerHoverStart}
         onHoverEnd={handleContainerHoverEnd}
         onTouchStart={handleContainerTouchStart}
@@ -112,22 +180,20 @@ const HeroSection: React.FC = () => {
           animate="visible"
           variants={containerVariants}
         >
-          {/* Profile Picture with Card Stack Effect */}
           <motion.div
             className="relative flex justify-center mb-8"
             initial="hidden"
             animate="visible"
-            style={{ minHeight: "16rem" }} // Ensure space for spread layout
+            style={{ minHeight: "16rem" }}
           >
             <div className="flex items-center justify-center w-full mt-12">
-              {/* Background Card 1 */}
               <AnimatePresence>
                 <motion.div
                   className="absolute w-64 h-64 rounded-lg shadow-md cursor-pointer bg-red-950"
                   variants={cardVariants}
                   initial="hidden"
                   animate={isSpread ? "spread" : "stacked"}
-                  custom={1} // Index for positioning
+                  custom={1}
                   style={{
                     transform: isSpread
                       ? "none"
@@ -136,14 +202,13 @@ const HeroSection: React.FC = () => {
                   }}
                 ></motion.div>
               </AnimatePresence>
-              {/* Background Card 2 */}
               <AnimatePresence>
                 <motion.div
                   className="absolute w-64 h-64 bg-[#4f46e5] rounded-lg shadow-md cursor-pointer"
                   variants={cardVariants}
                   initial="hidden"
                   animate={isSpread ? "spread" : "stacked"}
-                  custom={2} // Index for positioning
+                  custom={2}
                   style={{
                     transform: isSpread
                       ? "none"
@@ -152,7 +217,6 @@ const HeroSection: React.FC = () => {
                   }}
                 ></motion.div>
               </AnimatePresence>
-              {/* Profile Picture */}
               <motion.div
                 id="update"
                 className="relative w-64 h-64 bg-center bg-cover rounded-lg cursor-pointer"
@@ -170,50 +234,30 @@ const HeroSection: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Greeting and Name */}
           <motion.h1
             className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl"
             variants={textVariants}
           >
-            Hey, I&apos;m <span className="text-indigo-600">Sheikh Aali</span>
+            Hey, I'm <span className="text-indigo-600">Sheikh Aali</span>
           </motion.h1>
 
-          {/* Typewriter Effect */}
           <motion.div
             className="mt-4 text-2xl font-light text-gray-700 sm:text-3xl lg:text-4xl"
             variants={textVariants}
           >
-            <Typewriter
-              words={[
-                "Full-Stack Developer",
-                "Web Artisan",
-                "Code Enthusiast",
-                "Problem Solver",
-                "Tech Innovator",
-              ]}
-              loop={0}
-              cursor
-              cursorStyle="|"
-              cursorColor="#4F46E5"
-              typeSpeed={70}
-              deleteSpeed={50}
-              delaySpeed={1200}
-            />
+            Full-Stack Developer
           </motion.div>
 
-          {/* Description */}
           <motion.p
             className="max-w-3xl mx-auto mt-6 text-lg leading-relaxed text-gray-600 sm:text-xl"
             variants={textVariants}
           >
-            Based in Dhaka, Bangladesh 📍, I&apos;m a passionate developer
-            crafting seamless, dynamic web experiences. From sleek e-commerce
-            platforms to interactive applications, I turn ideas into reality.
-            Dive into my portfolio and let’s create something extraordinary
-            together!
+            Based in Dhaka, Bangladesh 📍, I'm a passionate developer crafting
+            seamless, dynamic web experiences. From sleek e-commerce platforms
+            to interactive applications, I turn ideas into reality. Dive into my
+            portfolio and let’s create something extraordinary together!
           </motion.p>
 
-          {/* Call-to-Action Buttons */}
           <motion.div
             className="flex flex-col justify-center gap-4 mt-10 sm:flex-row"
             variants={textVariants}
@@ -234,13 +278,6 @@ const HeroSection: React.FC = () => {
           </motion.div>
         </motion.div>
       </motion.div>
-
-      {/* Decorative Background Elements */}
-      <div className="absolute inset-0 overflow-hidden -z-10">
-        <div className="absolute w-40 h-40 rounded-full top-10 left-10 bg-indigo-200/30 blur-3xl animate-pulse"></div>
-        <div className="absolute delay-1000 rounded-full bottom-20 right-20 w-60 h-60 bg-purple-200/30 blur-3xl animate-pulse"></div>
-        <div className="absolute transform -translate-x-1/2 -translate-y-1/2 rounded-full top-1/2 left-1/2 w-80 h-80 bg-blue-100/20 blur-3xl"></div>
-      </div>
     </section>
   );
 };
