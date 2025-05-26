@@ -174,13 +174,21 @@ const Expertise2 = () => {
               {/* Icon and Title */}
               <div className="flex items-center mb-4">
                 <motion.div
+                  style={{
+                    color: backgroundColors[index], // Dynamic color
+                  }}
                   className="mr-4 text-4xl text-indigo-400"
                   variants={iconVariants}
                   whileHover="hover"
                 >
                   <item.Icon />
                 </motion.div>
-                <h2 className="text-xl font-bold text-white sm:text-2xl">
+                <h2
+                  style={{
+                    color: backgroundColors[index],
+                  }} // Dynamic color
+                  className={` text-xl font-bold  sm:text-2xl`}
+                >
                   {item.title}
                 </h2>
               </div>

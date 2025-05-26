@@ -299,7 +299,7 @@ const HeroSection: React.FC = () => {
             className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl"
             variants={textVariants}
           >
-            Hey, I'm <span className="text-indigo-600">Sheikh Aali</span>
+            Hey, Im <span className="text-indigo-600">Sheikh Aali</span>
           </motion.h1>
 
           <motion.div
@@ -313,7 +313,7 @@ const HeroSection: React.FC = () => {
             className="max-w-3xl mx-auto mt-6 text-lg leading-relaxed text-gray-600 sm:text-xl"
             variants={textVariants}
           >
-            Based in Dhaka, Bangladesh 📍, I'm a passionate developer crafting
+            Based in Dhaka, Bangladesh 📍, Im a passionate developer crafting
             seamless, dynamic web experiences. From sleek e-commerce platforms
             to interactive applications, I turn ideas into reality. Dive into my
             portfolio and let’s create something extraordinary together!
@@ -339,6 +339,7 @@ const HeroSection: React.FC = () => {
           </motion.div>
         </motion.div>
       </motion.div>
+      <div className="absolute inset-0 transition-opacity duration-300 opacity-0 rounded-xl bg-gradient-to-r from-indigo-500/10 to-blue-500/10 group-hover:opacity-100" />
     </section>
   );
 };
