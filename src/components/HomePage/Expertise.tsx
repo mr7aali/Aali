@@ -42,7 +42,6 @@ const backgroundCardVariants = {
   }),
   spread: (index: number) => ({
     opacity: 0.9,
-
     y: 0,
     rotate: 0,
     transition: {
@@ -50,7 +49,7 @@ const backgroundCardVariants = {
       type: "spring",
       stiffness: 80,
       damping: 15,
-      delay: index === 1 ? 0 : 0.2, // Staggered animation
+      delay: index === 1 ? 0 : 0.2,
     },
   }),
   stacked: (index: number) => ({
@@ -61,6 +60,7 @@ const backgroundCardVariants = {
     transition: { duration: 0.5 },
   }),
 };
+
 // Animation variants for icons
 const iconVariants = {
   hidden: { opacity: 0, rotate: -10 },
@@ -74,47 +74,52 @@ const Expertise2 = () => {
       title: "Frontend Development",
       description:
         "I craft responsive and interactive user interfaces using React.js, Next.js, and modern CSS frameworks like Tailwind CSS, Bootstrap, Material-UI, and Ant Design. My focus is on delivering high-performance web applications with exceptional UI/UX.",
-      Icon: FaReact, // react-icons/fa
+      Icon: FaReact,
     },
     {
       title: "Full-Stack Development",
       description:
         "Skilled in building end-to-end web applications with Next.js and React for the front end, and Node.js, Express, PostgreSQL, and MongoDB for the back end. I ensure seamless integration and robust, scalable solutions.",
-      Icon: SiPostman, // react-icons/si
+      Icon: SiPostman,
     },
     {
       title: "Problem Solving & Algorithms",
       description:
         "Proficient in functional and object-oriented programming with languages like C, C++, Python, Java, JavaScript, and TypeScript. I excel at solving complex problems and optimizing algorithms for efficient solutions.",
-      Icon: MobileOutlined, // @ant-design/icons
+      Icon: MobileOutlined,
     },
     {
       title: "Backend Development",
       description:
         "Experienced in building server-side applications using Node.js, Express, and Prisma, with expertise in managing databases like PostgreSQL, MongoDB, and Firebase. I create secure and efficient APIs to power dynamic applications.",
-      Icon: SiNodedotjs, // react-icons/si
+      Icon: SiNodedotjs,
     },
     {
       title: "Responsive Web Design",
       description:
         "I specialize in creating responsive and visually appealing designs using HTML5, CSS, Sass, and frameworks like Tailwind CSS and Bootstrap. My designs ensure optimal performance across devices and screen sizes.",
-      Icon: FaCss3Alt, // react-icons/fa
+      Icon: FaCss3Alt,
     },
     {
       title: "Version Control & Collaboration",
       description:
         "Adept at using Git and GitHub for version control, enabling efficient collaboration and code management. I streamline workflows and maintain clean, organized repositories for team projects.",
-      Icon: FaGithub, // react-icons/fa
+      Icon: FaGithub,
     },
   ];
-  const [isSpread, setIsSpread] = useState(false);
-  const handleContainerHoverStart = (): void => {
-    setIsSpread(true);
-  };
 
-  const handleContainerHoverEnd = (): void => {
-    setIsSpread(false);
-  };
+  // Track hovered card index (null if none)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  // Define unique background colors for each card
+  const backgroundColors = [
+    "#4f46e5", // Indigo
+    "#ec4899", // Pink
+    "#3b82f6", // Blue
+    "#10b981", // Emerald
+    "#f59e0b", // Amber
+    "#ef4444", // Red
+  ];
 
   return (
     <motion.section
@@ -137,23 +142,25 @@ const Expertise2 = () => {
       <div className="grid grid-cols-1 gap-x-[30px] gap-y-[30px] md:grid-cols-3 justify-items-center">
         {Items.map((item, index) => (
           <div className="relative" key={index}>
+            {/* Background Card */}
             <motion.div
-              className="absolute top-0 bottom-0 left-0 right-0 w-full rounded-lg shadow-md cursor-pointer bg-[#4f46e5]"
-              variants={backgroundCardVariants}
-              initial="hidden"
-              animate={isSpread ? "spread" : "stacked"}
-              custom={1} // Index for positioning
+              className="absolute top-0 bottom-0 left-0 right-0 w-full rounded-lg shadow-md cursor-pointer"
               style={{
-                transform: isSpread
-                  ? "none"
-                  : "translate(-10px, 10px) rotate(-5deg)",
-
+                backgroundColor: backgroundColors[index], // Unique color per card
+                transform:
+                  hoveredIndex === index
+                    ? "none"
+                    : "translate(-10px, 10px) rotate(-5deg)",
                 zIndex: 1,
               }}
+              variants={backgroundCardVariants}
+              initial="hidden"
+              animate={hoveredIndex === index ? "spread" : "stacked"}
+              custom={1}
             ></motion.div>
             {/* Main Card */}
             <motion.div
-              className="relative z-10 flex flex-col h-full p-6 transition-shadow duration-300 shadow-lg bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl hover:shadow-xl"
+              className="relative z-10 flex flex-col h-full p-6 transition-shadow duration-300 shadow-lg cursor-pointer bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl hover:shadow-xl"
               custom={index}
               initial="hidden"
               whileInView="visible"
@@ -161,8 +168,8 @@ const Expertise2 = () => {
               viewport={{ once: true }}
               variants={cardVariants}
               id="update-this-card"
-              onHoverStart={handleContainerHoverStart}
-              onHoverEnd={handleContainerHoverEnd}
+              onHoverStart={() => setHoveredIndex(index)}
+              onHoverEnd={() => setHoveredIndex(null)}
             >
               {/* Icon and Title */}
               <div className="flex items-center mb-4">
