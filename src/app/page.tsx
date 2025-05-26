@@ -1,4 +1,4 @@
-import Expertise2 from "@/components/HomePage/Expertise2";
+// import Expertise2 from "@/components/HomePage/Expertise2";
 import Project from "@/components/HomePage/Project";
 import { ScrollProgress } from "@/components/magicui/scroll-progress";
 import dynamic from "next/dynamic";
@@ -16,7 +16,7 @@ const HomePage = () => {
       <ScrollProgress className="top-[0px] h-2 " />
       <HeroSection />
       <Expertise />
-      <Expertise2 />
+      {/* <Expertise2 /> */}
       <AboutMe />
       <Project />
       <ContactWithMe />

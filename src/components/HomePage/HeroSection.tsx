@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 
-// Animation variants remain unchanged
+// Animation variants (unchanged)
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -80,7 +80,7 @@ const HeroSection: React.FC = () => {
   const [isSpread, setIsSpread] = useState<boolean>(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  // Define your skill set
+  // Define skill set
   const skills = [
     "Html5",
     "Css",
@@ -106,6 +106,27 @@ const HeroSection: React.FC = () => {
     "Firebase",
     "MongoDB",
   ];
+
+  // Color palette for skills
+  const skillColors = [
+    "rgba(79, 70, 229, 0.8)", // Indigo
+    "rgba(236, 72, 153, 0.8)", // Pink
+    "rgba(59, 130, 246, 0.8)", // Blue
+    "rgba(16, 185, 129, 0.8)", // Emerald
+    "rgba(245, 158, 11, 0.8)", // Amber
+  ];
+
+  // Load Google Font (Poppins)
+  useEffect(() => {
+    const link = document.createElement("link");
+    link.href =
+      "https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap";
+    link.rel = "stylesheet";
+    document.head.appendChild(link);
+    return () => {
+      document.head.removeChild(link);
+    };
+  }, []);
 
   // 2D canvas skill text effect
   useEffect(() => {
@@ -135,18 +156,21 @@ const HeroSection: React.FC = () => {
         fontSize: Math.random() * 16 + 14, // Font size between 14 and 30
         vx: (Math.random() - 0.5) * 2, // Slight horizontal drift
         vy: -(Math.random() * 2 + 2), // Upward movement
+        color: skillColors[Math.floor(Math.random() * skillColors.length)], // Random color
       };
     });
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "rgba(79, 70, 229, 0.8)"; // Indigo with slight transparency
-      ctx.font = "bold 20px Arial"; // Default font, will be overridden per skill
       ctx.globalCompositeOperation = "lighter";
 
       skillObjects.forEach((skill) => {
-        ctx.font = `bold ${skill.fontSize}px Arial`;
+        ctx.font = `600 ${skill.fontSize}px 'Poppins', sans-serif`;
+        ctx.fillStyle = skill.color;
+        ctx.shadowColor = skill.color;
+        ctx.shadowBlur = 8; // Subtle glow effect
         ctx.fillText(skill.text, skill.x, skill.y);
+        ctx.shadowBlur = 0; // Reset shadow to avoid affecting other drawings
 
         skill.x += skill.vx;
         skill.y += skill.vy;
@@ -158,6 +182,8 @@ const HeroSection: React.FC = () => {
           skill.x = Math.random() * canvas.width;
           skill.text = skills[Math.floor(Math.random() * skills.length)]; // Random new skill
           skill.fontSize = Math.random() * 16 + 14;
+          skill.color =
+            skillColors[Math.floor(Math.random() * skillColors.length)]; // New random color
         }
       });
 
@@ -273,8 +299,7 @@ const HeroSection: React.FC = () => {
             className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl"
             variants={textVariants}
           >
-            Hey, {"I'm"}
-            <span className="text-indigo-600">Sheikh Aali</span>
+            Hey, I'm <span className="text-indigo-600">Sheikh Aali</span>
           </motion.h1>
 
           <motion.div
@@ -288,11 +313,10 @@ const HeroSection: React.FC = () => {
             className="max-w-3xl mx-auto mt-6 text-lg leading-relaxed text-gray-600 sm:text-xl"
             variants={textVariants}
           >
-            Based in Dhaka, Bangladesh 📍, {"I'm"} a passionate developer
-            crafting seamless, dynamic web experiences. From sleek e-commerce
-            platforms to interactive applications, I turn ideas into reality.
-            Dive into my portfolio and let’s create something extraordinary
-            together!
+            Based in Dhaka, Bangladesh 📍, I'm a passionate developer crafting
+            seamless, dynamic web experiences. From sleek e-commerce platforms
+            to interactive applications, I turn ideas into reality. Dive into my
+            portfolio and let’s create something extraordinary together!
           </motion.p>
 
           <motion.div

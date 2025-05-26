@@ -2,14 +2,101 @@
 import { MobileOutlined } from "@ant-design/icons";
 import { FaReact } from "react-icons/fa";
 import { SiPostman } from "react-icons/si";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import { useState } from "react";
 
-const Expertise = () => {
+// Animation variants for section
+const sectionVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
+// Animation variants for main cards
+const cardVariants = {
+  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.5, delay: i * 0.2, ease: "easeOut" },
+  }),
+  hover: {
+    scale: 1.05,
+    boxShadow: "0 8px 24px rgba(0, 0, 0, 0.2)",
+    transition: { duration: 0.3, ease: "easeOut" },
+  },
+};
+
+// Animation variants for background cards (HeroSection-inspired)
+// const backgroundCardVariants = {
+//   hidden: { opacity: 0, scale: 0.8, x: 20, y: 20 },
+//   visible: (i: number) => ({
+//     opacity: 0.9,
+//     scale: 1,
+//     x: 0,
+//     y: 0,
+//     transition: {
+//       duration: 0.6,
+//       delay: i * 0.3,
+//       type: "spring",
+//       stiffness: 120,
+//       damping: 15,
+//       ease: "easeOut",
+//     },
+//   }),
+//   hover: {
+//     y: -5,
+//     rotate: 3,
+//     boxShadow: "0 6px 20px rgba(79, 70, 229, 0.5)",
+//     transition: { duration: 0.3, ease: "easeOut" },
+//   },
+// };
+const backgroundCardVariants = {
+  hidden: { opacity: 0, x: -10, rotate: -5 },
+  visible: (index: number) => ({
+    opacity: 0.7,
+    x: index === 1 ? -10 : 10,
+    y: index === 1 ? 10 : -10,
+    rotate: index === 1 ? -5 : 5,
+    transition: { duration: 0.6, delay: 0.2 },
+  }),
+  spread: (index: number) => ({
+    opacity: 0.9,
+
+    y: 0,
+    rotate: 0,
+    transition: {
+      duration: 0.6,
+      type: "spring",
+      stiffness: 80,
+      damping: 15,
+      delay: index === 1 ? 0 : 0.2, // Staggered animation
+    },
+  }),
+  stacked: (index: number) => ({
+    opacity: 0.7,
+    x: index === 1 ? -10 : 10,
+    y: index === 1 ? 10 : -10,
+    rotate: index === 1 ? -3 : 5,
+    transition: { duration: 0.5 },
+  }),
+};
+// Animation variants for icons
+const iconVariants = {
+  hidden: { opacity: 0, rotate: -10 },
+  visible: { opacity: 1, rotate: 0, transition: { duration: 0.4 } },
+  hover: { scale: 1.2, rotate: 5, transition: { duration: 0.2 } },
+};
+
+const Expertise2 = () => {
   const Items = [
     {
       title: "Frontend Dev React, NextJS",
       description:
-        // "Passionate about UI/UX. Over 4 years of development experience in HTML, CSS, JS, React and NextJS frameworks.",
         "Experienced Frontend Developer proficient in React and Next.js. Skilled in creating high-performance web applications with modern UI/UX design.",
       Icon: FaReact,
     },
@@ -17,71 +104,149 @@ const Expertise = () => {
       title: "Full-Stack Web Developer",
       description:
         "I'm skilled in Next.js and React for front-end, and PostgreSQL, MongoDB, for back-end development. Adept at building robust web applications and ensuring seamless user experiences.",
-      // "Skilled in developing hybrid mobile apps and cross-platform solutions using the Flutter framework.",
       Icon: SiPostman,
     },
     {
-      title: "Problem Solving.",
+      title: "Problem Solving",
       description:
-        "Experienced in both functional and OOP: C,C++, Python, Java, JavaScript, TypeScript.",
+        "Experienced in both functional and OOP: C, C++, Python, Java, JavaScript, TypeScript.",
       Icon: MobileOutlined,
     },
   ];
+  const [isSpread, setIsSpread] = useState(false);
+  const handleContainerHoverStart = (): void => {
+    setIsSpread(true);
+  };
+
+  const handleContainerHoverEnd = (): void => {
+    setIsSpread(false);
+  };
+
   return (
-    <AnimatePresence>
-      <motion.div
-        // initial={{ y: "-100%", opacity: 1 }}
-        // animate={{ y: "0", opacity: 1 }}
-        // transition={{
-        //   duration: 0.5,
-        // }}
-        className="mt-14 max-w-[1220px] mx-auto"
+    <motion.section
+      className="px-4 py-12 mx-auto mt-16 max-w-7xl sm:px-6 lg:px-8"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      variants={sectionVariants}
+    >
+      <motion.h1
+        className="mb-12 font-serif text-4xl font-extrabold text-center text-transparent sm:text-5xl bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text"
+        initial={{ opacity: 0, scale: 0.9 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        viewport={{ once: true }}
       >
-        <h1 className="text-center text-[50px] font-bold font-serif mb-16">
-          My Expertise
-        </h1>
-        <div
-          style={{
-            borderTop: "5px solid #111",
-            borderBottom: "5px solid #111",
-            borderLeft: "5px solid #111",
-            //   border:'1px solid red'
-          }}
-          className=" grid grid-cols-1 md:grid-cols-3 my-5 mx-2"
-        >
-          {Items.map((item, index) => (
-            <div
-              key={index}
+        My Expertise
+      </motion.h1>
+
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+        {Items.map((item, index) => (
+          <div
+            className="relative"
+            // style={{ border: "1px solid red" }}
+            key={index}
+          >
+            {/* Background Card */}
+            {/* <motion.div
+              className="absolute inset-0 z-0 translate-x-3 translate-y-3 border shadow-md bg-red-950 max-h-fit rounded-xl bg-gradient-to-br from-indigo-600/20 to-blue-600/20 backdrop-blur-sm border-indigo-400/30"
+              custom={index}
+              initial="hidden"
+              whileInView="visible"
+              whileHover="hover"
+              viewport={{ once: true }}
+              variants={backgroundCardVariants}
+              style={{ border: "1px solid red" }}
+            /> */}
+            <motion.div
+              className="absolute top-0 bottom-0 left-0 right-0 w-full rounded-lg shadow-md cursor-pointer bg-[#4f46e5]"
+              variants={backgroundCardVariants}
+              initial="hidden"
+              animate={isSpread ? "spread" : "stacked"}
+              custom={1} // Index for positioning
               style={{
-                borderRight: "5px solid #111",
-                // border:'1px solid red'
+                transform: isSpread
+                  ? "none"
+                  : "translate(-10px, 10px) rotate(-5deg)",
+                // border: "10px solid red",
+                zIndex: 1,
               }}
-              className="py-3 lg:py-8 px-2"
+            ></motion.div>
+            {/* Main Card */}
+            <motion.div
+              className="relative z-10 flex flex-col h-full p-6 transition-shadow duration-300 shadow-lg bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl hover:shadow-xl"
+              custom={index}
+              initial="hidden"
+              whileInView="visible"
+              whileHover="hover"
+              viewport={{ once: true }}
+              variants={cardVariants}
+              id="update-this-card"
+              onHoverStart={handleContainerHoverStart}
+              onHoverEnd={handleContainerHoverEnd}
             >
-              <div className="flex items-center">
-                <span className="text-[50px] px-2 lg:px-5 text">
-                  {<item.Icon className="" />}
-                </span>
-                <h2 className="text-[25px] lg:text-[30px]">{item.title}</h2>
+              {/* Icon and Title */}
+              <div className="flex items-center mb-4">
+                <motion.div
+                  className="mr-4 text-4xl text-indigo-400"
+                  variants={iconVariants}
+                  whileHover="hover"
+                >
+                  <item.Icon />
+                </motion.div>
+                <h2 className="text-xl font-bold text-white sm:text-2xl">
+                  {item.title}
+                </h2>
               </div>
 
-              <div className="ml-2">
-                <p className="font-bold  py-2 font-serif">{"<h3>"}</p>
-                <div style={{ borderLeft: "3px solid #111" }} className="ml-4">
-                  <span className=" lg:text-[17px] block p-4 font-mono font-extrabold">
-                    {item.description}
-                  </span>
-                </div>
-                <p className="font-bold  py-2 font-serif">
+              {/* Description with Code Style */}
+              <div className="relative flex flex-col justify-center flex-grow min-h-[120px]">
+                <motion.span
+                  className="font-mono text-sm text-indigo-500 sm:text-base"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.4, delay: 0.2 }}
+                  viewport={{ once: true }}
+                >
+                  {"<h3>"}
+                </motion.span>
+                <motion.p
+                  className="pl-4 my-2 font-mono text-sm leading-relaxed text-gray-300 border-l-4 border-indigo-500 sm:text-base"
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.2 }}
+                  viewport={{ once: true }}
+                >
+                  {item.description}
+                </motion.p>
+                <motion.span
+                  className="font-mono text-sm text-indigo-500 sm:text-base"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 0.4, delay: 0.2 }}
+                  viewport={{ once: true }}
+                >
                   {"</h3>"}
-                </p>
+                </motion.span>
               </div>
-            </div>
-          ))}
-        </div>
-      </motion.div>
-    </AnimatePresence>
+
+              {/* Decorative Gradient Overlay */}
+              <div className="absolute inset-0 transition-opacity duration-300 opacity-0 rounded-xl bg-gradient-to-r from-indigo-500/10 to-blue-500/10 group-hover:opacity-100" />
+            </motion.div>
+          </div>
+        ))}
+      </div>
+
+      {/* Decorative Divider */}
+      <motion.div
+        className="h-1 mt-12 bg-gradient-to-r from-transparent via-indigo-500 to-transparent"
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true }}
+      />
+    </motion.section>
   );
 };
 
-export default Expertise;
+export default Expertise2;
