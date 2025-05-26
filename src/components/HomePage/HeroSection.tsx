@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 
-// Animation variants for smooth transitions
+// Animation variants remain unchanged
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -80,7 +80,34 @@ const HeroSection: React.FC = () => {
   const [isSpread, setIsSpread] = useState<boolean>(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  // 2D canvas bubble effect
+  // Define your skill set
+  const skills = [
+    "Html5",
+    "Css",
+    "Sass",
+    "Responsive Design",
+    "Tailwind CSS",
+    "Bootstrap",
+    "Material-UI",
+    "Ant Design",
+    "JavaScript",
+    "TypeScript",
+    "Python",
+    "C++",
+    "C",
+    "React",
+    "NextJs",
+    "GitHub",
+    "NodeJs",
+    "Express",
+    "Prisma",
+    "SQL",
+    "PostgreSQL",
+    "Firebase",
+    "MongoDB",
+  ];
+
+  // 2D canvas skill text effect
   useEffect(() => {
     if (!canvasRef.current) {
       console.error("HeroSection: Canvas ref is not available");
@@ -98,38 +125,46 @@ const HeroSection: React.FC = () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const bubbles = Array.from({ length: 50 }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      radius: Math.random() * 20 + 10,
-      vx: (Math.random() - 0.5) * 2,
-      vy: -(Math.random() * 2 + 2), // Upward movement
-    }));
+    // Initialize skill objects
+    const skillObjects = Array.from({ length: 20 }, () => {
+      const skill = skills[Math.floor(Math.random() * skills.length)];
+      return {
+        x: Math.random() * canvas.width,
+        y: canvas.height + 50, // Start below canvas
+        text: skill,
+        fontSize: Math.random() * 16 + 14, // Font size between 14 and 30
+        vx: (Math.random() - 0.5) * 2, // Slight horizontal drift
+        vy: -(Math.random() * 2 + 2), // Upward movement
+      };
+    });
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "rgba(139, 91, 250, 0.7)"; // Indigo
+      ctx.fillStyle = "rgba(79, 70, 229, 0.8)"; // Indigo with slight transparency
+      ctx.font = "bold 20px Arial"; // Default font, will be overridden per skill
       ctx.globalCompositeOperation = "lighter";
 
-      bubbles.forEach((bubble) => {
-        ctx.beginPath();
-        ctx.arc(bubble.x, bubble.y, bubble.radius, 0, Math.PI * 2);
-        ctx.fill();
+      skillObjects.forEach((skill) => {
+        ctx.font = `bold ${skill.fontSize}px Arial`;
+        ctx.fillText(skill.text, skill.x, skill.y);
 
-        bubble.x += bubble.vx;
-        bubble.y += bubble.vy;
-        bubble.x += Math.sin(Date.now() * 0.002 + bubble.x) * 0.5; // Wobble
+        skill.x += skill.vx;
+        skill.y += skill.vy;
+        skill.x += Math.sin(Date.now() * 0.002 + skill.x) * 0.5; // Wobble effect
 
-        if (bubble.y + bubble.radius < 0) {
-          bubble.y = canvas.height + bubble.radius;
-          bubble.x = Math.random() * canvas.width;
+        // Reset skill to bottom when it moves off the top
+        if (skill.y < -50) {
+          skill.y = canvas.height + 50;
+          skill.x = Math.random() * canvas.width;
+          skill.text = skills[Math.floor(Math.random() * skills.length)]; // Random new skill
+          skill.fontSize = Math.random() * 16 + 14;
         }
       });
 
       requestAnimationFrame(animate);
     };
     animate();
-    console.log("HeroSection: 2D animation loop started");
+    console.log("HeroSection: Skill animation loop started");
 
     const handleResize = () => {
       canvas.width = window.innerWidth;
@@ -139,7 +174,7 @@ const HeroSection: React.FC = () => {
 
     return () => {
       window.removeEventListener("resize", handleResize);
-      console.log("HeroSection: 2D canvas cleanup completed");
+      console.log("HeroSection: Canvas cleanup completed");
     };
   }, []);
 
@@ -238,7 +273,8 @@ const HeroSection: React.FC = () => {
             className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl"
             variants={textVariants}
           >
-            Hey, I'm <span className="text-indigo-600">Sheikh Aali</span>
+            Hey, {"I'm"}
+            <span className="text-indigo-600">Sheikh Aali</span>
           </motion.h1>
 
           <motion.div
@@ -252,10 +288,11 @@ const HeroSection: React.FC = () => {
             className="max-w-3xl mx-auto mt-6 text-lg leading-relaxed text-gray-600 sm:text-xl"
             variants={textVariants}
           >
-            Based in Dhaka, Bangladesh 📍, I'm a passionate developer crafting
-            seamless, dynamic web experiences. From sleek e-commerce platforms
-            to interactive applications, I turn ideas into reality. Dive into my
-            portfolio and let’s create something extraordinary together!
+            Based in Dhaka, Bangladesh 📍, {"I'm"} a passionate developer
+            crafting seamless, dynamic web experiences. From sleek e-commerce
+            platforms to interactive applications, I turn ideas into reality.
+            Dive into my portfolio and let’s create something extraordinary
+            together!
           </motion.p>
 
           <motion.div
