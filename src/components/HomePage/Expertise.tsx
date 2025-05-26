@@ -1,7 +1,7 @@
 "use client";
 import { MobileOutlined } from "@ant-design/icons";
-import { FaReact } from "react-icons/fa";
-import { SiPostman } from "react-icons/si";
+import { FaCss3Alt, FaGithub, FaReact } from "react-icons/fa";
+import { SiNodedotjs, SiPostman } from "react-icons/si";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
@@ -71,22 +71,40 @@ const iconVariants = {
 const Expertise2 = () => {
   const Items = [
     {
-      title: "Frontend Dev React, NextJS",
+      title: "Frontend Development",
       description:
-        "Experienced Frontend Developer proficient in React and Next.js. Skilled in creating high-performance web applications with modern UI/UX design.",
-      Icon: FaReact,
+        "I craft responsive and interactive user interfaces using React.js, Next.js, and modern CSS frameworks like Tailwind CSS, Bootstrap, Material-UI, and Ant Design. My focus is on delivering high-performance web applications with exceptional UI/UX.",
+      Icon: FaReact, // react-icons/fa
     },
     {
-      title: "Full-Stack Web Developer",
+      title: "Full-Stack Development",
       description:
-        "I'm skilled in Next.js and React for front-end, and PostgreSQL, MongoDB, for back-end development. Adept at building robust web applications and ensuring seamless user experiences.",
-      Icon: SiPostman,
+        "Skilled in building end-to-end web applications with Next.js and React for the front end, and Node.js, Express, PostgreSQL, and MongoDB for the back end. I ensure seamless integration and robust, scalable solutions.",
+      Icon: SiPostman, // react-icons/si
     },
     {
-      title: "Problem Solving",
+      title: "Problem Solving & Algorithms",
       description:
-        "Experienced in both functional and OOP: C, C++, Python, Java, JavaScript, TypeScript.",
-      Icon: MobileOutlined,
+        "Proficient in functional and object-oriented programming with languages like C, C++, Python, Java, JavaScript, and TypeScript. I excel at solving complex problems and optimizing algorithms for efficient solutions.",
+      Icon: MobileOutlined, // @ant-design/icons
+    },
+    {
+      title: "Backend Development",
+      description:
+        "Experienced in building server-side applications using Node.js, Express, and Prisma, with expertise in managing databases like PostgreSQL, MongoDB, and Firebase. I create secure and efficient APIs to power dynamic applications.",
+      Icon: SiNodedotjs, // react-icons/si
+    },
+    {
+      title: "Responsive Web Design",
+      description:
+        "I specialize in creating responsive and visually appealing designs using HTML5, CSS, Sass, and frameworks like Tailwind CSS and Bootstrap. My designs ensure optimal performance across devices and screen sizes.",
+      Icon: FaCss3Alt, // react-icons/fa
+    },
+    {
+      title: "Version Control & Collaboration",
+      description:
+        "Adept at using Git and GitHub for version control, enabling efficient collaboration and code management. I streamline workflows and maintain clean, organized repositories for team projects.",
+      Icon: FaGithub, // react-icons/fa
     },
   ];
   const [isSpread, setIsSpread] = useState(false);
@@ -116,7 +134,7 @@ const Expertise2 = () => {
         My Expertise
       </motion.h1>
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-x-[30px] gap-y-[30px] md:grid-cols-3 justify-items-center">
         {Items.map((item, index) => (
           <div className="relative" key={index}>
             <motion.div
@@ -129,7 +147,7 @@ const Expertise2 = () => {
                 transform: isSpread
                   ? "none"
                   : "translate(-10px, 10px) rotate(-5deg)",
-                // border: "10px solid red",
+
                 zIndex: 1,
               }}
             ></motion.div>
