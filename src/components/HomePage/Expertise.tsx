@@ -4,6 +4,7 @@ import { FaCss3Alt, FaGithub, FaReact } from "react-icons/fa";
 import { SiNodedotjs, SiPostman } from "react-icons/si";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { ExpertiseItemsData } from "../../../data";
 
 // Animation variants for section
 const sectionVariants = {
@@ -69,45 +70,6 @@ const iconVariants = {
 };
 
 const Expertise2 = () => {
-  const Items = [
-    {
-      title: "Frontend Development",
-      description:
-        "I craft responsive and interactive user interfaces using React.js, Next.js, and modern CSS frameworks like Tailwind CSS, Bootstrap, Material-UI, and Ant Design. My focus is on delivering high-performance web applications with exceptional UI/UX.",
-      Icon: FaReact,
-    },
-    {
-      title: "Full-Stack Development",
-      description:
-        "Skilled in building end-to-end web applications with Next.js and React for the front end, and Node.js, Express, PostgreSQL, and MongoDB for the back end. I ensure seamless integration and robust, scalable solutions.",
-      Icon: SiPostman,
-    },
-    {
-      title: "Problem Solving & Algorithms",
-      description:
-        "Proficient in functional and object-oriented programming with languages like C, C++, Python, Java, JavaScript, and TypeScript. I excel at solving complex problems and optimizing algorithms for efficient solutions.",
-      Icon: MobileOutlined,
-    },
-    {
-      title: "Backend Development",
-      description:
-        "Experienced in building server-side applications using Node.js, Express, and Prisma, with expertise in managing databases like PostgreSQL, MongoDB, and Firebase. I create secure and efficient APIs to power dynamic applications.",
-      Icon: SiNodedotjs,
-    },
-    {
-      title: "Responsive Web Design",
-      description:
-        "I specialize in creating responsive and visually appealing designs using HTML5, CSS, Sass, and frameworks like Tailwind CSS and Bootstrap. My designs ensure optimal performance across devices and screen sizes.",
-      Icon: FaCss3Alt,
-    },
-    {
-      title: "Version Control & Collaboration",
-      description:
-        "Adept at using Git and GitHub for version control, enabling efficient collaboration and code management. I streamline workflows and maintain clean, organized repositories for team projects.",
-      Icon: FaGithub,
-    },
-  ];
-
   // Track hovered card index (null if none)
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
@@ -123,7 +85,7 @@ const Expertise2 = () => {
 
   return (
     <motion.section
-      className="px-4 py-12 mx-auto mt-16 max-w-7xl sm:px-6 lg:px-8"
+      className="px-4 pb-12 mx-auto mt -16 max-w-7xl sm:px-6 lg:px-8"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
@@ -139,8 +101,8 @@ const Expertise2 = () => {
         My Expertise
       </motion.h1>
 
-      <div className="grid grid-cols-1 gap-x-[30px] gap-y-[30px] md:grid-cols-3 justify-items-center">
-        {Items.map((item, index) => (
+      <div className="px-2 grid grid-cols-1 md:grid-cols-2 gap-x-[30px] gap-y-[30px] xl:grid-cols-3 justify-items-center">
+        {ExpertiseItemsData.map((item, index) => (
           <div className="relative" key={index}>
             {/* Background Card */}
             <motion.div
@@ -230,7 +192,6 @@ const Expertise2 = () => {
           </div>
         ))}
       </div>
-
       {/* Decorative Divider */}
       <motion.div
         className="h-1 mt-12 bg-gradient-to-r from-transparent via-indigo-500 to-transparent"

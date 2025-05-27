@@ -190,7 +190,7 @@ const AboutMe = () => {
           variants={containerVariants}
           className="text-center"
         >
-          <SectionTitle title="ABOUT ME" />
+          {/* <SectionTitle title="ABOUT ME" /> */}
           <motion.h1
             variants={itemVariants}
             className="mt-4 font-serif text-3xl font-bold text-transparent md:text-5xl bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text"

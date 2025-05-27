@@ -15,9 +15,9 @@ const HomePage = () => {
       <Header />
       <ScrollProgress className="top-[0px] h-2 " />
       <HeroSection />
-      <Expertise />
-      {/* <Expertise2 /> */}
       <AboutMe />
+      <Expertise />
+
       <Project />
       <ContactWithMe />
       <Footer />

@@ -2,7 +2,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
-import { skills } from "../../../data";
+import { HeroSectionData, skills } from "../../../data";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -194,7 +194,7 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <section className="relative flex items-center justify-center min-h-screen py-12 overflow-hidden bg-gradient-to-br from-indigo-50 via-white to-purple-50 sm:py-20">
+    <section className="relative flex items-center justify-center py-12 overflow-hidden bg-gradient-to-br from-indigo-50 via-white to-purple-50 sm:py-20">
       <canvas
         ref={canvasRef}
         className="absolute inset-0 z-[10] pointer-events-none"
@@ -277,24 +277,22 @@ const HeroSection: React.FC = () => {
             className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl"
             variants={textVariants}
           >
-            Hey, Im <span className="text-indigo-600">Sheikh Aali</span>
+            {HeroSectionData.title}{" "}
+            <span className="text-indigo-600">{HeroSectionData.name}</span>
           </motion.h1>
 
           <motion.div
             className="mt-4 text-2xl font-light text-gray-700 sm:text-3xl lg:text-4xl"
             variants={textVariants}
           >
-            Full-Stack Developer
+            {HeroSectionData.designation}
           </motion.div>
 
           <motion.p
             className="max-w-3xl mx-auto mt-6 text-lg leading-relaxed text-gray-600 sm:text-xl"
             variants={textVariants}
           >
-            Based in Dhaka, Bangladesh 📍, Im a passionate developer crafting
-            seamless, dynamic web experiences. From sleek e-commerce platforms
-            to interactive applications, I turn ideas into reality. Dive into my
-            portfolio and let’s create something extraordinary together!
+            {HeroSectionData.decription}
           </motion.p>
 
           <motion.div
