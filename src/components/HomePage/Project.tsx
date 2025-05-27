@@ -6,11 +6,7 @@ import ProjectCard from "../card/ProjectCard";
 // Animation variants
 const sectionVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
-  },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
 const titleVariants = {
@@ -31,15 +27,6 @@ const cardVariants = {
   },
 };
 
-const dividerVariants = {
-  hidden: { opacity: 0, scaleX: 0 },
-  visible: {
-    opacity: 1,
-    scaleX: 1,
-    transition: { duration: 0.8, ease: "easeOut" },
-  },
-};
-
 const Project = () => {
   const projects = [
     {
@@ -48,7 +35,7 @@ const Project = () => {
       description:
         "A fully functional e-commerce platform with React, Next.js, Node.js, and MongoDB, featuring secure payments and responsive design.",
       imageLink:
-        "https://i.ibb.co/bNp212J/Web-capture-6-12-2023-03911-localhost.jpg",
+        "https://www.adhamdannaway.com/wp-content/uploads/2022/12/feature-ui-design-book.jpg",
       skills: ["React", "NextJs", "NodeJs", "MongoDB", "TailwindCSS"],
     },
     {
@@ -65,7 +52,8 @@ const Project = () => {
       subtitle: "Freelance Work",
       description:
         "A task management application with real-time updates, built using React, Firebase, and TypeScript for efficient collaboration.",
-      imageLink: "https://via.placeholder.com/400x300?text=Task+App",
+      imageLink:
+        "https://www.adhamdannaway.com/wp-content/uploads/2022/12/feature-ui-design-book.jpg",
       skills: ["React", "TypeScript", "GitHub"],
     },
   ];
@@ -97,7 +85,6 @@ const Project = () => {
           viewport={{ once: true }}
           variants={titleVariants}
         >
-          <SectionTitle title="My Portfolio" />
           <h1
             className="mt-3 font-serif text-3xl font-bold md:text-4xl"
             style={{ color: backgroundColors[0] }}
@@ -156,19 +143,12 @@ const Project = () => {
 
         {/* Decorative Divider */}
         <motion.div
-          className="relative h-1 mt-12 overflow-hidden rounded-full"
-          initial="hidden"
-          whileInView="visible"
+          className="h-1 mt-12 bg-gradient-to-r from-transparent via-[#4f46e5] to-transparent"
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
-          variants={dividerVariants}
-        >
-          <div
-            className="absolute inset-0 transition-opacity duration-300 bg-gradient-to-r"
-            style={{
-              background: `linear-gradient(to right, ${backgroundColors[0]}20, ${backgroundColors[2]}20, ${backgroundColors[0]}20)`,
-            }}
-          />
-        </motion.div>
+        />
       </div>
     </motion.section>
   );
