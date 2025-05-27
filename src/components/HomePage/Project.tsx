@@ -1,12 +1,11 @@
 "use client";
-import Image from "next/image";
 import SectionTitle from "../SectionTitle";
 import { motion } from "framer-motion";
 import ProjectCard from "../card/ProjectCard";
 
 // Animation variants
 const sectionVariants = {
-  hidden: { opacity: 0, y: 50 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
@@ -15,22 +14,29 @@ const sectionVariants = {
 };
 
 const titleVariants = {
-  hidden: { opacity: 0, scale: 0.9 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.6 } },
+  hidden: { opacity: 0, y: 10 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  hidden: { opacity: 0, y: 20 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    scale: 1,
-    transition: { duration: 0.5, delay: i * 0.2, ease: "easeOut" },
+    transition: { duration: 0.5, delay: i * 0.15, ease: "easeOut" },
   }),
   hover: {
-    scale: 1.05,
-    boxShadow: "0 8px 24px rgba(0, 0, 0, 0.2)",
+    scale: 1.03,
     transition: { duration: 0.3 },
+  },
+};
+
+const dividerVariants = {
+  hidden: { opacity: 0, scaleX: 0 },
+  visible: {
+    opacity: 1,
+    scaleX: 1,
+    transition: { duration: 0.8, ease: "easeOut" },
   },
 };
 
@@ -42,7 +48,8 @@ const Project = () => {
       description:
         "A fully functional e-commerce platform with React, Next.js, Node.js, and MongoDB, featuring secure payments and responsive design.",
       imageLink:
-        "https://www.adhamdannaway.com/wp-content/uploads/2022/12/feature-ui-design-book.jpg",
+        "https://i.ibb.co/bNp212J/Web-capture-6-12-2023-03911-localhost.jpg",
+      skills: ["React", "NextJs", "NodeJs", "MongoDB", "TailwindCSS"],
     },
     {
       title: "Portfolio Website",
@@ -51,19 +58,20 @@ const Project = () => {
         "A modern portfolio showcasing my skills and projects, built with Next.js, Tailwind CSS, and Framer Motion for dynamic animations.",
       imageLink:
         "https://www.adhamdannaway.com/wp-content/uploads/2022/12/feature-ui-design-book.jpg",
+      skills: ["NextJs", "TypeScript", "TailwindCSS", "React"],
     },
     {
       title: "Task Management App",
       subtitle: "Freelance Work",
       description:
         "A task management application with real-time updates, built using React, Firebase, and TypeScript for efficient collaboration.",
-      imageLink:
-        "https://www.adhamdannaway.com/wp-content/uploads/2022/12/feature-ui-design-book.jpg",
+      imageLink: "https://via.placeholder.com/400x300?text=Task+App",
+      skills: ["React", "TypeScript", "GitHub"],
     },
   ];
 
-  // Colors from Expertise2
-  const highlightColors = [
+  // Color palette
+  const backgroundColors = [
     "#4f46e5", // Indigo
     "#ec4899", // Pink
     "#3b82f6", // Blue
@@ -74,8 +82,8 @@ const Project = () => {
 
   return (
     <motion.section
-      id="PORTFOLIO"
-      className="px-6 py-16 bg-gradient-to-b from-gray-50 to-white md:px-10 md:py-20"
+      id="portfolio"
+      className="px-4 py-12 bg-gray-100 md:px-6 md:py-16"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
@@ -89,18 +97,21 @@ const Project = () => {
           viewport={{ once: true }}
           variants={titleVariants}
         >
-          <SectionTitle title="MY PORTFOLIO" />
-          <h1 className="mt-4 font-serif text-3xl font-bold text-transparent md:text-5xl bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text">
-            My Portfolio
+          <SectionTitle title="My Portfolio" />
+          <h1
+            className="mt-3 font-serif text-3xl font-bold md:text-4xl"
+            style={{ color: backgroundColors[0] }}
+          >
+            Recent Projects
           </h1>
-          <p className="max-w-3xl mx-auto mt-6 text-base text-gray-600 md:text-lg">
-            Explore some of my latest projects, showcasing my expertise in
-            building modern, responsive, and user-friendly web applications.
+          <p className="max-w-2xl mx-auto mt-4 text-base text-gray-600 md:text-lg">
+            Discover my latest works, reflecting my skills and passion for
+            crafting innovative web solutions.
           </p>
         </motion.div>
 
         <motion.div
-          className="grid gap-6 mt-12 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid gap-5 mt-10 sm:grid-cols-2 md:grid-cols-3"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -111,35 +122,33 @@ const Project = () => {
               custom={index}
               variants={cardVariants}
               whileHover="hover"
-              className="relative group"
+              className="group"
             >
               <ProjectCard
                 title={project.title}
                 subtitle={project.subtitle}
                 description={project.description}
                 imageLink={project.imageLink}
-                accentColor={highlightColors[index % highlightColors.length]}
+                accentColor={backgroundColors[index % backgroundColors.length]}
+                skills={project.skills}
               />
             </motion.div>
           ))}
         </motion.div>
 
         <motion.div
-          className="mt-12 text-center"
+          className="mt-10 text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
           viewport={{ once: true }}
         >
           <motion.a
             href="#projects"
-            whileHover={{
-              scale: 1.05,
-              backgroundImage: "linear-gradient(to right, #4f46e5, #3b82f6)",
-            }}
+            className="inline-block px-6 py-3 text-sm font-medium text-white rounded-lg shadow-sm hover:shadow-md"
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-block px-8 py-4 font-semibold text-white rounded-lg shadow-md bg-gradient-to-r from-indigo-600 to-blue-500 hover:shadow-lg"
-            style={{ animation: "pulse 2s infinite" }}
+            style={{ backgroundColor: backgroundColors[2] }}
           >
             View All Projects
           </motion.a>
@@ -147,28 +156,20 @@ const Project = () => {
 
         {/* Decorative Divider */}
         <motion.div
-          className="h-1 mt-16 bg-gradient-to-r from-transparent via-indigo-500 to-transparent"
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="relative h-1 mt-12 overflow-hidden rounded-full"
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
-        />
+          variants={dividerVariants}
+        >
+          <div
+            className="absolute inset-0 transition-opacity duration-300 bg-gradient-to-r"
+            style={{
+              background: `linear-gradient(to right, ${backgroundColors[0]}20, ${backgroundColors[2]}20, ${backgroundColors[0]}20)`,
+            }}
+          />
+        </motion.div>
       </div>
-
-      {/* CSS for pulse animation */}
-      <style jsx>{`
-        @keyframes pulse {
-          0% {
-            box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4);
-          }
-          70% {
-            box-shadow: 0 0 0 10px rgba(79, 70, 229, 0);
-          }
-          100% {
-            box-shadow: 0 0 0 0 rgba(79, 70, 229, 0);
-          }
-        }
-      `}</style>
     </motion.section>
   );
 };

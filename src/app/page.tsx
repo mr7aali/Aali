@@ -13,10 +13,10 @@ const HomePage = () => {
   return (
     <div>
       <Header />
-      <ScrollProgress className="top-[0px] h-2 " />
+      {/* <ScrollProgress className="top-[0px] h-2 " />
       <HeroSection />
       <AboutMe />
-      <Expertise />
+      <Expertise /> */}
 
       <Project />
       <ContactWithMe />
