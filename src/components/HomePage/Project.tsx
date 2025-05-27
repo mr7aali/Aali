@@ -1,7 +1,9 @@
 "use client";
-import SectionTitle from "../SectionTitle";
+
 import { motion } from "framer-motion";
 import ProjectCard from "../card/ProjectCard";
+import useParticleBackground from "@/utils/useParticleBackground";
+// import useParticleBackground from "../hooks/useParticleBackground";
 
 // Animation variants
 const sectionVariants = {
@@ -28,6 +30,8 @@ const cardVariants = {
 };
 
 const Project = () => {
+  const canvasRef = useParticleBackground();
+
   const projects = [
     {
       title: "E-commerce Full-stack Website",
@@ -35,7 +39,7 @@ const Project = () => {
       description:
         "A fully functional e-commerce platform with React, Next.js, Node.js, and MongoDB, featuring secure payments and responsive design.",
       imageLink:
-        "https://www.adhamdannaway.com/wp-content/uploads/2022/12/feature-ui-design-book.jpg",
+        "https://i.ibb.co/bNp212J/Web-capture-6-12-2023-03911-localhost.jpg",
       skills: ["React", "NextJs", "NodeJs", "MongoDB", "TailwindCSS"],
     },
     {
@@ -52,8 +56,7 @@ const Project = () => {
       subtitle: "Freelance Work",
       description:
         "A task management application with real-time updates, built using React, Firebase, and TypeScript for efficient collaboration.",
-      imageLink:
-        "https://www.adhamdannaway.com/wp-content/uploads/2022/12/feature-ui-design-book.jpg",
+      imageLink: "https://via.placeholder.com/400x300?text=Task+App",
       skills: ["React", "TypeScript", "GitHub"],
     },
   ];
@@ -71,13 +74,19 @@ const Project = () => {
   return (
     <motion.section
       id="portfolio"
-      className="px-4 py-12 bg-gray-100 md:px-6 md:py-16"
+      className="relative px-4 py-12 overflow-hidden md:px-6 md:py-16 bg-gradient-to-b from-gray-50 to-white"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
       variants={sectionVariants}
     >
-      <div className="mx-auto max-w-7xl">
+      {/* Three.js Canvas */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 z-0"
+        style={{ opacity: 0.3 }}
+      />
+      <div className="relative z-10 mx-auto max-w-7xl">
         <motion.div
           className="text-center"
           initial="hidden"

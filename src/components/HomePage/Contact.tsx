@@ -3,8 +3,6 @@ import { BsRocketTakeoff } from "react-icons/bs";
 import { FiMail } from "react-icons/fi";
 import { BiErrorCircle } from "react-icons/bi";
 import { useForm, SubmitHandler } from "react-hook-form";
-import SectionTitle from "../SectionTitle";
-
 
 interface IFormInputs {
   name: string;
@@ -38,26 +36,13 @@ const ContactWithMe = () => {
     console.log(result.success);
   };
 
-
-
-
-
-
-
-
-
-
   return (
-
-    
     <div
       id="CONTACT"
       // style={{ border: "1px solid red" }}
       className="max-w-[1280px] mt-16 mx-auto grid sm:grid-cols-2 px-5"
     >
       <div className="mb-8">
-        <SectionTitle title={"CONTACT"} />
-
         <h1 className="font-bold text-[45px] font-serif py-2">
           Got a problem to solve?
         </h1>
@@ -172,8 +157,6 @@ const ContactWithMe = () => {
         {/* //! form end */}
       </div>
     </div>
-   
-
   );
 };
 
