@@ -2,8 +2,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
+import { skills } from "../../../data";
 
-// Animation variants (unchanged)
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -79,33 +79,6 @@ const profileVariants = {
 const HeroSection: React.FC = () => {
   const [isSpread, setIsSpread] = useState<boolean>(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  // Define skill set
-  const skills = [
-    "Html5",
-    "Css",
-    "Sass",
-    "Responsive Design",
-    "Tailwind CSS",
-    "Bootstrap",
-    "Material-UI",
-    "Ant Design",
-    "JavaScript",
-    "TypeScript",
-    "Python",
-    "C++",
-    "C",
-    "React",
-    "NextJs",
-    "GitHub",
-    "NodeJs",
-    "Express",
-    "Prisma",
-    "SQL",
-    "PostgreSQL",
-    "Firebase",
-    "MongoDB",
-  ];
 
   // Color palette for skills
   const skillColors = [
@@ -260,6 +233,9 @@ const HeroSection: React.FC = () => {
                       ? "none"
                       : "translate(-10px, 10px) rotate(-5deg)",
                     zIndex: 1,
+                    backgroundImage: "url('/images/me/pic2.jpg')",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
                   }}
                 ></motion.div>
               </AnimatePresence>
@@ -275,6 +251,9 @@ const HeroSection: React.FC = () => {
                       ? "none"
                       : "translate(10px, -10px) rotate(5deg)",
                     zIndex: 1,
+                    backgroundImage: "url('/images/me/pic1.jpg')",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
                   }}
                 ></motion.div>
               </AnimatePresence>
@@ -285,8 +264,7 @@ const HeroSection: React.FC = () => {
                 initial="hidden"
                 animate={isSpread ? "spread" : "stacked"}
                 style={{
-                  backgroundImage:
-                    "url('https://i.ibb.co/j3fDZYd/IMG-20231018-160911.jpg')",
+                  backgroundImage: "url('/images/me/pic3.jpg')",
                   boxShadow:
                     "0 4px 16px rgba(0, 0, 0, 0.2), 0 0 20px rgba(79, 70, 229, 0.2)",
                   zIndex: 2,

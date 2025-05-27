@@ -3,47 +3,9 @@ import { useEffect, useRef } from "react";
 import SectionTitle from "../SectionTitle";
 import { motion } from "framer-motion";
 import * as THREE from "three";
+import { skills } from "../../../data";
 
 const AboutMe = () => {
-  const skills = [
-    "Html5",
-    "Css",
-    "Sass",
-    "Responsive Design",
-    "Tailwind CSS",
-    "JavaScript",
-    "TypeScript",
-    "Python",
-    "Django",
-    "Java",
-    "C++",
-    "C",
-    "React",
-    "NextJs",
-    "GitHub",
-    "NodeJs",
-    "Express",
-
-    "Postman",
-    "REST APIs",
-    "Object-Oriented Programming",
-    "Prisma",
-    "SQL",
-    "PostgreSQL",
-    "Firebase",
-    "MongoDB",
-    "RESTful APIs",
-    "React Native",
-    "Redux",
-    "Web Development",
-    "Figma",
-    "MySQL",
-    "Node.js",
-    "express.js",
-    "Nest.js",
-    "Prisma",
-  ];
-
   const canvasRef = useRef(null);
 
   // Three.js setup
@@ -260,7 +222,7 @@ const AboutMe = () => {
               className="font-serif text-sm leading-relaxed text-justify text-gray-600 md:text-lg md:text-left"
               style={{ textShadow: "0 1px 2px rgba(0, 0, 0, 0.1)" }}
             >
-              I'm a{" "}
+              Im a{" "}
               <strong style={{ color: highlightColors[0] }}>
                 Frontend Web Developer
               </strong>{" "}
@@ -293,7 +255,7 @@ const AboutMe = () => {
               className="font-serif text-sm leading-relaxed text-justify text-gray-600 md:text-lg md:text-left"
               style={{ textShadow: "0 1px 2px rgba(0, 0, 0, 0.1)" }}
             >
-              I'm always open to{" "}
+              Im always open to{" "}
               <strong style={{ color: highlightColors[4] }}>
                 job opportunities
               </strong>{" "}
