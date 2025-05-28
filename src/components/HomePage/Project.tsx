@@ -56,7 +56,8 @@ const Project = () => {
       subtitle: "Freelance Work",
       description:
         "A task management application with real-time updates, built using React, Firebase, and TypeScript for efficient collaboration.",
-      imageLink: "https://via.placeholder.com/400x300?text=Task+App",
+      imageLink:
+        "https://www.adhamdannaway.com/wp-content/uploads/2022/12/feature-ui-design-book.jpg",
       skills: ["React", "TypeScript", "GitHub"],
     },
   ];

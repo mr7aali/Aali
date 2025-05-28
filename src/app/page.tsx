@@ -1,6 +1,6 @@
 // import Expertise2 from "@/components/HomePage/Expertise2";
 import Project from "@/components/HomePage/Project";
-import { ScrollProgress } from "@/components/magicui/scroll-progress";
+
 import dynamic from "next/dynamic";
 const AboutMe = dynamic(() => import("@/components/HomePage/AboutMe"));
 const ContactWithMe = dynamic(() => import("@/components/HomePage/Contact"));
@@ -13,7 +13,7 @@ const HomePage = () => {
   return (
     <div>
       <Header />
-      <ScrollProgress className="top-[0px] h-2 " />
+      {/* <ScrollProgress className="top-[0px] h-2 " /> */}
       <HeroSection />
       <AboutMe />
       <Expertise />

@@ -5,6 +5,7 @@ import {
   InstagramOutlined,
   GithubOutlined,
   MenuOutlined,
+  CloseOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import { useState } from "react";
@@ -16,17 +17,17 @@ const headerVariants = {
   visible: {
     y: 0,
     opacity: 1,
-    transition: { duration: 0.5, ease: "easeOut" },
+    transition: { duration: 0.6, ease: "easeOut" },
   },
 };
 
 // Animation variants for nav items
 const navItemVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: (i: number) => ({
+  visible: (i) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.3, delay: i * 0.1, ease: "easeOut" },
+    transition: { duration: 0.4, delay: i * 0.1, ease: "easeOut" },
   }),
 };
 
@@ -36,74 +37,180 @@ const mobileMenuVariants = {
   visible: {
     height: "auto",
     opacity: 1,
-    transition: { duration: 0.4, ease: "easeOut" },
+    transition: { duration: 0.5, ease: "easeOut" },
   },
   exit: {
     height: 0,
     opacity: 0,
-    transition: { duration: 0.3, ease: "easeIn" },
+    transition: { duration: 0.4, ease: "easeIn" },
   },
 };
 
-// Animation variants for social icons in mobile menu
+// Animation variants for social icons
 const socialIconVariants = {
   hidden: { opacity: 0, scale: 0.8 },
-  visible: (i: number) => ({
+  visible: (i) => ({
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.3, delay: i * 0.15, ease: "easeOut" },
+    transition: { duration: 0.4, delay: i * 0.15, ease: "easeOut" },
+  }),
+};
+
+// Animation variants for logo letters
+const logoLetterVariants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: (i) => ({
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.3, delay: i * 0.1, ease: "easeOut" },
   }),
 };
 
 const Header = () => {
-  const NavItem = [
-    { text: "about", path: "#ABOUT" },
-    { text: "portfolio", path: "#PORTFOLIO" },
-    { text: "contact", path: "#CONTACT" },
+  const backgroundColors = {
+    indigo: "#4f46e5",
+    pink: "#ec4899",
+    blue: "#3b82f6",
+    emerald: "#10b981",
+    amber: "#f59e0b",
+    red: "#ef4444",
+  };
+
+  const NavItems = [
+    {
+      text: "About",
+      path: "#ABOUT",
+      baseColor: backgroundColors.indigo,
+      hoverColor: backgroundColors.amber,
+    },
+    {
+      text: "Portfolio",
+      path: "#PORTFOLIO",
+      baseColor: backgroundColors.pink,
+      hoverColor: backgroundColors.red,
+    },
+    {
+      text: "Contact",
+      path: "#CONTACT",
+      baseColor: backgroundColors.blue,
+      hoverColor: backgroundColors.pink,
+    },
+    {
+      text: "Dashboard",
+      path: "/dashboard",
+      baseColor: backgroundColors.emerald,
+      hoverColor: backgroundColors.blue,
+    },
   ];
-  const SocialIcon = [
-    { Icon: LinkedinOutlined, path: "https://www.linkedin.com/in/mr7aali/" },
-    { Icon: FacebookOutlined, path: "https://www.facebook.com/mr07aali/" },
-    { Icon: InstagramOutlined, path: "https://www.instagram.com/mr7aali/" },
-    { Icon: GithubOutlined, path: "https://github.com/mr7aali" },
+
+  const SocialIcons = [
+    {
+      Icon: LinkedinOutlined,
+      path: "https://www.linkedin.com/in/mr7aali/",
+      label: "LinkedIn",
+      baseColor: backgroundColors.amber,
+      hoverColor: backgroundColors.pink,
+    },
+    {
+      Activeness: "active",
+      Icon: FacebookOutlined,
+      path: "https://www.facebook.com/mr7aali/",
+      label: "Facebook",
+      baseColor: backgroundColors.emerald,
+      hoverColor: backgroundColors.indigo,
+    },
+    {
+      Icon: InstagramOutlined,
+      path: "https://www.instagram.com/mr7aali/",
+      label: "Instagram",
+      baseColor: backgroundColors.red,
+      hoverColor: backgroundColors.blue,
+    },
+    {
+      Icon: GithubOutlined,
+      path: "https://github.com/mr7aali",
+      label: "GitHub",
+      baseColor: backgroundColors.blue,
+      hoverColor: backgroundColors.red,
+    },
   ];
+
   const [open, setOpen] = useState(false);
 
   return (
     <motion.header
-      className="fixed top-0 z-50 w-full shadow-lg bg-gradient-to-r from-gray-900 to-gray-800"
+      className="fixed top-0 z-50 w-full border-b shadow-lg p b-6 backdrop-blur-lg border-red-500/30"
       initial="hidden"
       animate="visible"
       variants={headerVariants}
+      role="banner"
     >
-      <div className="flex items-center px-4 py-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <div className="flex items-center px-5 py-5 mx-auto max-w-7xl sm:px-6 lg:px-8">
         {/* Logo */}
         <Link
           href="/"
-          className="flex-1 text-2xl font-extrabold tracking-tight text-white no-underline sm:text-3xl"
+          className="flex-1 text-2xl font-extrabold tracking-tight no-underline sm:text-3xl"
+          aria-label="Home"
         >
-          <motion.span
-            whileHover={{ scale: 1.05, color: "#60A5FA" }}
-            transition={{ duration: 0.2 }}
-          >
-            Aali
-          </motion.span>
+          <motion.div className="inline-flex">
+            {"Aali".split("").map((letter, i) => (
+              <motion.span
+                key={i}
+                custom={i}
+                initial="hidden"
+                animate="visible"
+                variants={logoLetterVariants}
+                style={{ color: backgroundColors.amber }}
+                whileHover={{ scale: 1.2, color: backgroundColors.red }}
+                transition={{ duration: 0.2 }}
+              >
+                {letter}
+              </motion.span>
+            ))}
+          </motion.div>
         </Link>
 
         {/* Mobile Menu Toggle */}
         <div
           onClick={() => setOpen(!open)}
-          className="text-2xl text-white cursor-pointer md:hidden"
+          className="text-2xl cursor-pointer md:hidden"
+          aria-label={open ? "Close menu" : "Open menu"}
+          role="button"
         >
           <motion.div whileTap={{ scale: 0.9 }}>
-            <MenuOutlined className="transition-colors duration-200 hover:text-blue-400" />
+            {open ? (
+              <CloseOutlined
+                className="transition-colors duration-300"
+                style={{ color: backgroundColors.emerald }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.color = backgroundColors.pink)
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.color = backgroundColors.emerald)
+                }
+              />
+            ) : (
+              <MenuOutlined
+                className="transition-colors duration-300"
+                style={{ color: backgroundColors.emerald }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.color = backgroundColors.pink)
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.color = backgroundColors.emerald)
+                }
+              />
+            )}
           </motion.div>
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="items-center hidden space-x-6 md:flex">
-          <ul className="flex space-x-4 list-none">
-            {NavItem.map((item, index) => (
+        <nav
+          className="items-center hidden space-x-10 md:flex"
+          aria-label="Main navigation"
+        >
+          <ul className="flex space-x-8 list-none">
+            {NavItems.map((item, index) => (
               <motion.li
                 key={item.text}
                 custom={index}
@@ -114,44 +221,52 @@ const Header = () => {
               >
                 <Link
                   href={item.path}
-                  className="relative px-3 py-2 text-sm font-medium text-white no-underline uppercase lg:text-base group"
+                  className="relative px-4 py-2 text-base font-bold no-underline uppercase group"
+                  style={{ color: item.baseColor }}
+                  aria-current={item.path === "#HOME" ? "page" : undefined}
                 >
-                  {item.text}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                  <motion.span
+                    whileHover={{ scale: 1.1, color: item.hoverColor }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {item.text}
+                  </motion.span>
+                  <span
+                    className="absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full"
+                    style={{ backgroundColor: item.hoverColor }}
+                  ></span>
                 </Link>
               </motion.li>
             ))}
-            <motion.li
-              custom={NavItem.length}
-              initial="hidden"
-              animate="visible"
-              variants={navItemVariants}
-              className="relative"
-            >
-              <Link
-                href="/dashboard"
-                className="relative px-3 py-2 text-sm font-medium text-white no-underline uppercase lg:text-base group"
-              >
-                dashboard
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
-              </Link>
-            </motion.li>
           </ul>
 
           {/* Social Icons */}
-          <div className="flex ml-6 space-x-2">
-            {SocialIcon.map((item, index) => (
-              <motion.a
+          <div className="flex ml-10 space-x-4">
+            {SocialIcons.map((item, index) => (
+              <motion.div
                 key={index}
-                href={item.path}
-                target="_blank"
-                className="p-2 text-xl text-white lg:text-2xl"
-                whileHover={{ scale: 1.2, color: "#60A5FA" }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ duration: 0.2 }}
+                className="relative flex flex-col items-center group"
               >
-                <item.Icon />
-              </motion.a>
+                <motion.a
+                  href={item.path}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 text-xl lg:text-2xl"
+                  style={{ color: item.baseColor }}
+                  whileHover={{ scale: 1.3, color: item.hoverColor }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ duration: 0.2 }}
+                  aria-label={`Visit my ${item.label}`}
+                >
+                  <item.Icon />
+                </motion.a>
+                <span
+                  className="hidden absolute bottom-[-10px] text-xs font-bold z-50 group-hover:block"
+                  style={{ color: item.hoverColor }}
+                >
+                  {item.label}
+                </span>
+              </motion.div>
             ))}
           </div>
         </nav>
@@ -165,62 +280,73 @@ const Header = () => {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="w-full bg-gray-800 md:hidden"
+            className="w-full border-t bg-gray-900/90 backdrop-blur-md md:hidden border-red-500/30"
+            role="navigation"
+            aria-label="Mobile navigation"
           >
-            <div className="flex flex-col items-center pt-3">
-              {NavItem.map((item, index) => (
+            <div className="flex flex-col items-center px-5 pt-4 pb-6">
+              {NavItems.map((item, index) => (
                 <motion.div
                   key={item.text}
                   custom={index}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
-                  // style={{ borderBottom: "1px solid #fff" }}
                   className="w-full text-center"
                 >
                   <Link
-                    style={{ borderBottom: "1px solid #fff" }}
                     href={item.path}
                     onClick={() => setOpen(false)}
-                    className="block w-full py-3 text-lg font-medium text-center text-white no-underline uppercase transition-colors duration-200 border-b border-gray-600 hover:bg-gray-700"
+                    className="block w-full py-3 text-lg font-bold text-center no-underline uppercase transition-colors duration-300 border-b"
+                    style={{
+                      color: item.baseColor,
+                      borderColor: item.baseColor,
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = item.hoverColor;
+                      e.currentTarget.style.backgroundColor = `${item.hoverColor}20`;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = item.baseColor;
+                      e.currentTarget.style.backgroundColor = "transparent";
+                    }}
+                    aria-current={item.path === "#HOME" ? "page" : undefined}
                   >
                     {item.text}
                   </Link>
                 </motion.div>
               ))}
-              <motion.div
-                custom={NavItem.length}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: NavItem.length * 0.1 }}
-                className="w-full text-center"
-              >
-                <Link
-                  href="/dashboard"
-                  onClick={() => setOpen(false)}
-                  style={{ borderBottom: "1px solid #fff" }}
-                  className="block w-full py-3 text-lg font-medium text-center text-white no-underline uppercase transition-colors duration-200 border-b border-gray-600 hover:bg-gray-700"
-                >
-                  dashboard
-                </Link>
-              </motion.div>
-              <div className="flex justify-center py-4 space-x-4">
-                {SocialIcon.map((item, index) => (
-                  <motion.a
+              <div className="flex justify-center py-6 space-x-6">
+                {SocialIcons.map((item, index) => (
+                  <motion.div
                     key={index}
-                    href={item.path}
-                    target="_blank"
-                    className="p-2 text-2xl text-white"
+                    className="relative flex flex-col items-center group"
                     custom={index}
                     initial="hidden"
                     animate="visible"
                     variants={socialIconVariants}
-                    whileHover={{ scale: 1.2, color: "#60A5FA" }}
-                    whileTap={{ scale: 0.9 }}
-                    transition={{ duration: 0.2 }}
+                    style={{ border: "1px solid red" }}
                   >
-                    <item.Icon />
-                  </motion.a>
+                    <motion.a
+                      href={item.path}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 text-2xl"
+                      style={{ color: item.baseColor }}
+                      whileHover={{ scale: 1.3, color: item.hoverColor }}
+                      whileTap={{ scale: 0.9 }}
+                      transition={{ duration: 0.2 }}
+                      aria-label={`Visit my ${item.label}`}
+                    >
+                      <item.Icon />
+                    </motion.a>
+                    <span
+                      className="hidden absolute bottom-[-12px] text-xs font-bold z-50 group-hover:block"
+                      style={{ color: item.hoverColor }}
+                    >
+                      {item.label}
+                    </span>
+                  </motion.div>
                 ))}
               </div>
             </div>
