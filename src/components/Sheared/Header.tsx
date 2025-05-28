@@ -325,7 +325,6 @@ const Header = () => {
                     initial="hidden"
                     animate="visible"
                     variants={socialIconVariants}
-                    style={{ border: "1px solid red" }}
                   >
                     <motion.a
                       href={item.path}
