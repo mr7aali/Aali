@@ -79,7 +79,7 @@ const Project = () => {
   return (
     <motion.section
       id="portfolio"
-      className="relative px-4 py-12 overflow-hidden md:px-6 md:py-16 bg-gradient-to-b from-gray-50 to-white"
+      className="relative px-4 py-12 overflow-hidden md:px-6 md:py-16"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}

@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { HeroSectionData, skills } from "../../../data";
+import useParticleBackground from "@/utils/useParticleBackground";
+// import useParticleBackground from "./useParticleBackground";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -79,6 +81,7 @@ const profileVariants = {
 const HeroSection: React.FC = () => {
   const [isSpread, setIsSpread] = useState<boolean>(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const particleCanvasRef = useParticleBackground();
 
   // Color palette for skills
   const skillColors = [
@@ -194,7 +197,12 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <section className="relative flex items-center justify-center py-12 overflow-hidden bg-gradient-to-br from-indigo-50 via-white to-purple-50 sm:py-20">
+    <section className="relative flex items-center justify-center py-12 overflow-hidden bg-transparent sm:py-20">
+      <canvas
+        ref={particleCanvasRef}
+        className="absolute inset-0 z-[5] pointer-events-none"
+        style={{ opacity: 0.6 }}
+      />
       <canvas
         ref={canvasRef}
         className="absolute inset-0 z-[10] pointer-events-none"

@@ -86,7 +86,7 @@ const Expertise2 = () => {
 
   return (
     <motion.section
-      className="relative px-4 pb-12 mx-auto mt-16 overflow-hidden max-w-7xl sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white"
+      className="relative px-4 pb-12 mx-auto mt-16 overflow-hidden max-w-7xl sm:px-6 lg:px-8"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}

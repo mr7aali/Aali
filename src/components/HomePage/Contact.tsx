@@ -132,7 +132,10 @@ const ContactWithMe = () => {
             </label>
             <input
               {...register("email", { required: true })}
-              onBlur={() => trigger("email")}
+              onBlur={(e) => {
+                trigger("email");
+                e.currentTarget.style.borderImage = `linear-gradient(45deg, ${backgroundColors.blue}, ${backgroundColors.indigo}) 1`;
+              }}
               aria-invalid={errors.email ? "true" : "false"}
               aria-describedby={errors.email ? "email-error" : undefined}
               type="email"
@@ -145,9 +148,6 @@ const ContactWithMe = () => {
               }}
               onFocus={(e) =>
                 (e.currentTarget.style.borderImage = `linear-gradient(45deg, ${backgroundColors.pink}, ${backgroundColors.amber}) 1`)
-              }
-              onBlur={(e) =>
-                (e.currentTarget.style.borderImage = `linear-gradient(45deg, ${backgroundColors.blue}, ${backgroundColors.indigo}) 1`)
               }
             />
             {errors.email && (
@@ -173,7 +173,10 @@ const ContactWithMe = () => {
             </label>
             <textarea
               {...register("message", { required: true })}
-              onBlur={() => trigger("message")}
+              onBlur={(e) => {
+                trigger("message");
+                e.currentTarget.style.borderImage = `linear-gradient(45deg, ${backgroundColors.blue}, ${backgroundColors.indigo}) 1`;
+              }}
               aria-invalid={errors.message ? "true" : "false"}
               aria-describedby={errors.message ? "message-error" : undefined}
               name="message"
@@ -186,9 +189,6 @@ const ContactWithMe = () => {
               }}
               onFocus={(e) =>
                 (e.currentTarget.style.borderImage = `linear-gradient(45deg, ${backgroundColors.pink}, ${backgroundColors.amber}) 1`)
-              }
-              onBlur={(e) =>
-                (e.currentTarget.style.borderImage = `linear-gradient(45deg, ${backgroundColors.blue}, ${backgroundColors.indigo}) 1`)
               }
             ></textarea>
             {errors.message && (

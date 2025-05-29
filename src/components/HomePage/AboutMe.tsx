@@ -173,10 +173,7 @@ const AboutMe = () => {
   ];
 
   return (
-    <div
-      id="ABOUT"
-      className="relative px-6 py-16 overflow-hidden bg-gradient-to-b from-gray-50 to-white md:px-10"
-    >
+    <div id="ABOUT" className="relative px-6 py-16 overflow-hidden md:px-10">
       {/* Three.js Canvas */}
       <canvas
         ref={canvasRef}
