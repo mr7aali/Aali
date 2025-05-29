@@ -1,5 +1,8 @@
 // import Expertise2 from "@/components/HomePage/Expertise2";
+"use client";
 import Project from "@/components/HomePage/Project";
+import SectionDevider from "@/components/Sheared/Devider";
+import { motion } from "framer-motion";
 
 import dynamic from "next/dynamic";
 const AboutMe = dynamic(() => import("@/components/HomePage/AboutMe"));
@@ -15,11 +18,15 @@ const HomePage = () => {
       <Header />
       {/* <ScrollProgress className="top-[0px] h-2 " /> */}
       <HeroSection />
+      <SectionDevider />
       <AboutMe />
+      <SectionDevider />
       <Expertise />
-
+      <SectionDevider />
       <Project />
+      <SectionDevider />
       <ContactWithMe />
+
       <Footer />
 
       {/* <div className="mb-[100px]"></div> */}

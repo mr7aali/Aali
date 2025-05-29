@@ -172,15 +172,6 @@ const Project = () => {
             </a>
           </motion.div>
         </motion.div>
-
-        {/* Decorative Divider */}
-        <motion.div
-          className="h-1 mt-12 bg-gradient-to-r from-transparent via-[#4f46e5] to-transparent"
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
-        />
       </div>
     </motion.section>
   );

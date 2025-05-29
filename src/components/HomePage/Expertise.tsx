@@ -70,7 +70,7 @@ const iconVariants = {
   hover: { scale: 1.2, rotate: 5, transition: { duration: 0.2 } },
 };
 
-const Expertise2 = () => {
+const Expertise = () => {
   // Track hovered card index (null if none)
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
@@ -194,16 +194,9 @@ const Expertise2 = () => {
           ))}
         </div>
         {/* Decorative Divider */}
-        <motion.div
-          className="h-1 mt-12 bg-gradient-to-r from-transparent via-indigo-500 to-transparent"
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
-        />
       </div>
     </motion.section>
   );
 };
 
-export default Expertise2;
+export default Expertise;
