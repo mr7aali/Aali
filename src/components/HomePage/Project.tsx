@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import ProjectCard from "../card/ProjectCard";
 import useParticleBackground from "@/utils/useParticleBackground";
+import Link from "next/link";
 // import useParticleBackground from "../hooks/useParticleBackground";
 
 // Animation variants
@@ -28,7 +29,10 @@ const cardVariants = {
     transition: { duration: 0.3 },
   },
 };
-
+const textVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
 const Project = () => {
   const canvasRef = useParticleBackground();
 
@@ -140,7 +144,7 @@ const Project = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <motion.a
+          {/* <motion.a
             href="#projects"
             className="inline-block px-6 py-3 text-sm font-medium text-white rounded-lg shadow-sm hover:shadow-md"
             whileHover={{ scale: 1.05 }}
@@ -148,7 +152,25 @@ const Project = () => {
             style={{ backgroundColor: backgroundColors[2] }}
           >
             View All Projects
-          </motion.a>
+          </motion.a> */}
+          <motion.div
+            className="flex flex-col justify-center gap-4 mt-10 sm:flex-row"
+            variants={textVariants}
+          >
+            {/* <Link
+            href="#CONTACT"
+            className="inline-block px-6 py-3 font-semibold text-white transition-all duration-300 transform bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-700 hover:-translate-y-1 hover:shadow-lg"
+          >
+            Connect with Me
+          </Link> */}
+            <a
+              target="_blank"
+              href="https://drive.google.com/file/d/1WBsVIWXOKahIR3xDql8yvpgeKAsdATeN/view?usp=drive_link"
+              className="inline-block px-6 py-3 font-semibold text-indigo-600 transition-all duration-300 transform bg-white border border-indigo-200 rounded-lg shadow-md hover:bg-gray-100 hover:-translate-y-1 hover:shadow-lg"
+            >
+              Explore My CV
+            </a>
+          </motion.div>
         </motion.div>
 
         {/* Decorative Divider */}

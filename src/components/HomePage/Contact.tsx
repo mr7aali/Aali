@@ -105,9 +105,9 @@ const ContactWithMe = () => {
               onFocus={(e) =>
                 (e.currentTarget.style.borderImage = `linear-gradient(45deg, ${backgroundColors.pink}, ${backgroundColors.amber}) 1`)
               }
-              onBlur={(e) =>
-                (e.currentTarget.style.borderImage = `linear-gradient(45deg, ${backgroundColors.blue}, ${backgroundColors.indigo}) 1`)
-              }
+              // onBlur={(e) =>
+              //   (e.currentTarget.style.borderImage = `linear-gradient(45deg, ${backgroundColors.blue}, ${backgroundColors.indigo}) 1`)
+              // }
             />
             {errors.name && (
               <p
