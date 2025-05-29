@@ -24,7 +24,7 @@ const headerVariants = {
 // Animation variants for nav items
 const navItemVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: (i) => ({
+  visible: (i: number) => ({
     opacity: 1,
     y: 0,
     transition: { duration: 0.4, delay: i * 0.1, ease: "easeOut" },
@@ -49,7 +49,7 @@ const mobileMenuVariants = {
 // Animation variants for social icons
 const socialIconVariants = {
   hidden: { opacity: 0, scale: 0.8 },
-  visible: (i) => ({
+  visible: (i: number) => ({
     opacity: 1,
     scale: 1,
     transition: { duration: 0.4, delay: i * 0.15, ease: "easeOut" },
@@ -59,7 +59,7 @@ const socialIconVariants = {
 // Animation variants for logo letters
 const logoLetterVariants = {
   hidden: { opacity: 0, x: -20 },
-  visible: (i) => ({
+  visible: (i: number) => ({
     opacity: 1,
     x: 0,
     transition: { duration: 0.3, delay: i * 0.1, ease: "easeOut" },
