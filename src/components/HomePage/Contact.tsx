@@ -11,6 +11,15 @@ interface IFormInputs {
 }
 
 const ContactWithMe = () => {
+  const backgroundColors = {
+    indigo: "#4f46e5",
+    pink: "#ec4899",
+    blue: "#3b82f6",
+    emerald: "#10b981",
+    amber: "#f59e0b",
+    red: "#ef4444",
+  };
+
   const {
     register,
     formState: { errors },
@@ -39,33 +48,44 @@ const ContactWithMe = () => {
   return (
     <div
       id="CONTACT"
-      // style={{ border: "1px solid red" }}
       className="max-w-[1280px] mt-16 mx-auto grid sm:grid-cols-2 px-5"
     >
       <div className="mb-8">
-        <h1 className="font-bold text-[45px] font-serif py-2">
+        <h1
+          className="font-bold text-[45px] font-serif py-2 text-transparent bg-clip-text"
+          style={{
+            backgroundImage: `linear-gradient(45deg, ${backgroundColors.indigo}, ${backgroundColors.pink})`,
+          }}
+        >
           Got a problem to solve?
         </h1>
-        <p className="text-[20px] font-serif font-thin">
+        <p
+          className="text-[20px] font-serif font-thin"
+          style={{ color: backgroundColors.blue }}
+        >
           Get your space suit ready and tell me your ideas to{" "}
-          <strong>develop</strong> your <strong>dream website</strong>.
+          <strong style={{ color: backgroundColors.emerald }}>develop</strong>{" "}
+          your{" "}
+          <strong style={{ color: backgroundColors.emerald }}>
+            dream website
+          </strong>
+          .
         </p>
       </div>
 
-      <div>
-        {/* //! form start */}
-
+      <div className="bg-transparent">
         <form
           onSubmit={handleSubmit(onSubmit)}
           action=""
           method="get"
           className="flex flex-col sm:px-4"
-          style={{ caretColor: "red" }}
+          style={{ caretColor: backgroundColors.amber }}
         >
-          <div className="">
+          <div>
             <label
               htmlFor="HomePageNameField"
-              className=" uppercase font-mono font-bold text-[20px]"
+              className="uppercase font-mono font-bold text-[20px]"
+              style={{ color: backgroundColors.indigo }}
             >
               Your Name
             </label>
@@ -73,88 +93,165 @@ const ContactWithMe = () => {
               {...register("name", { required: true })}
               onBlur={() => trigger("name")}
               aria-invalid={errors.name ? "true" : "false"}
+              aria-describedby={errors.name ? "name-error" : undefined}
               type="text"
               id="HomePageNameField"
               placeholder="Enter Your Name"
-              className="w-full border-[2px] focus-within:border-3  focus:border-[#5252ff]  border-[black] outline-none  my-3 font-mono font-extrabold text-[18px] h-[60px] p-[12px]"
+              className="w-full border-[2px] focus-within:border-3 outline-none my-3 font-mono font-extrabold text-[18px] h-[60px] p-[12px] bg-gray-800/90"
+              style={{
+                borderImage: `linear-gradient(45deg, ${backgroundColors.blue}, ${backgroundColors.indigo}) 1`,
+                color: backgroundColors.indigo,
+              }}
+              onFocus={(e) =>
+                (e.currentTarget.style.borderImage = `linear-gradient(45deg, ${backgroundColors.pink}, ${backgroundColors.amber}) 1`)
+              }
+              onBlur={(e) =>
+                (e.currentTarget.style.borderImage = `linear-gradient(45deg, ${backgroundColors.blue}, ${backgroundColors.indigo}) 1`)
+              }
             />
-
             {errors.name && (
-              <p className="text-red-600 mb-2 ml-0 font-serif text-[12px] font-semibold flex items-center">
-                <BiErrorCircle className="mr-2" /> Name cannot be empty
+              <p
+                className="text-red-600 mb-2 ml-0 font-serif text-[12px] font-semibold flex items-center"
+                style={{ color: backgroundColors.red }}
+              >
+                <BiErrorCircle
+                  className="mr-2"
+                  style={{ color: backgroundColors.red }}
+                />{" "}
+                Name cannot be empty
               </p>
             )}
           </div>
-          <div className="pt-">
+          <div>
             <label
               htmlFor="HomePageEmailField"
-              className=" uppercase font-mono font-bold text-[20px]"
+              className="uppercase font-mono font-bold text-[20px]"
+              style={{ color: backgroundColors.indigo }}
             >
-              Your Email address
+              Your Email Address
             </label>
             <input
               {...register("email", { required: true })}
               onBlur={() => trigger("email")}
               aria-invalid={errors.email ? "true" : "false"}
+              aria-describedby={errors.email ? "email-error" : undefined}
               type="email"
               id="HomePageEmailField"
               placeholder="Enter Your Email"
-              // style={{border:"2px solid black"}}
-              className="w-full border-[2px] focus-within:border-3  focus:border-[#5252ff]  border-[black] outline-none  my-3 font-mono font-extrabold text-[18px] h-[60px] p-[12px]"
+              className="w-full border-[2px] focus-within:border-3 outline-none my-3 font-mono font-extrabold text-[18px] h-[60px] p-[12px] bg-gray-800/90"
+              style={{
+                borderImage: `linear-gradient(45deg, ${backgroundColors.blue}, ${backgroundColors.indigo}) 1`,
+                color: backgroundColors.indigo,
+              }}
+              onFocus={(e) =>
+                (e.currentTarget.style.borderImage = `linear-gradient(45deg, ${backgroundColors.pink}, ${backgroundColors.amber}) 1`)
+              }
+              onBlur={(e) =>
+                (e.currentTarget.style.borderImage = `linear-gradient(45deg, ${backgroundColors.blue}, ${backgroundColors.indigo}) 1`)
+              }
             />
             {errors.email && (
-              <p className="text-red-600 mb-2 ml-0 font-serif text-[12px] font-semibold flex items-center">
-                <BiErrorCircle className="mr-2" /> Invalid Email
+              <p
+                className="text-red-600 mb-2 ml-0 font-serif text-[12px] font-semibold flex items-center"
+                style={{ color: backgroundColors.red }}
+              >
+                <BiErrorCircle
+                  className="mr-2"
+                  style={{ color: backgroundColors.red }}
+                />{" "}
+                Invalid Email
               </p>
             )}
           </div>
-          <div className="pt-">
+          <div>
             <label
-              htmlFor="HomemessageField"
-              className=" uppercase font-mono font-bold text-[20px]"
+              htmlFor="HomeMessageField"
+              className="uppercase font-mono font-bold text-[20px]"
+              style={{ color: backgroundColors.indigo }}
             >
-              Type Your MESSAGE
+              Type Your Message
             </label>
             <textarea
               {...register("message", { required: true })}
               onBlur={() => trigger("message")}
               aria-invalid={errors.message ? "true" : "false"}
+              aria-describedby={errors.message ? "message-error" : undefined}
               name="message"
-              id="HomemessageField"
+              id="HomeMessageField"
               placeholder="Type message..."
-              className="w-full border-[2px] focus-within:border-3  focus:border-[#5252ff]  border-[black] outline-none  my-3 font-mono font-extrabold text-[18px] h-[120px] p-[12px]"
+              className="w-full border-[2px] focus-within:border-3 outline-none my-3 font-mono font-extrabold text-[18px] h-[120px] p-[12px] bg-gray-800/90"
+              style={{
+                borderImage: `linear-gradient(45deg, ${backgroundColors.blue}, ${backgroundColors.indigo}) 1`,
+                color: backgroundColors.indigo,
+              }}
+              onFocus={(e) =>
+                (e.currentTarget.style.borderImage = `linear-gradient(45deg, ${backgroundColors.pink}, ${backgroundColors.amber}) 1`)
+              }
+              onBlur={(e) =>
+                (e.currentTarget.style.borderImage = `linear-gradient(45deg, ${backgroundColors.blue}, ${backgroundColors.indigo}) 1`)
+              }
             ></textarea>
-
             {errors.message && (
-              <p className="text-red-600 mb-2 ml-0 font-serif text-[12px] font-semibold flex items-center">
-                <BiErrorCircle className="mr-2" /> Message box cannot be empty
+              <p
+                className="text-red-600 mb-2 ml-0 font-serif text-[12px] font-semibold flex items-center"
+                style={{ color: backgroundColors.red }}
+              >
+                <BiErrorCircle
+                  className="mr-2"
+                  style={{ color: backgroundColors.red }}
+                />{" "}
+                Message box cannot be empty
               </p>
             )}
           </div>
-          <div className="flex  w-full items-center">
-            <p className="flex-1 text-[18px]  lg:text-[20px] hidden font-mono lg:flex items-center ">
+          <div className="flex items-center w-full">
+            <p
+              className="flex-1 text-[18px] font-mono flex items-center"
+              style={{ color: backgroundColors.emerald }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.color = backgroundColors.pink)
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.color = backgroundColors.emerald)
+              }
+            >
               <span className="mt-2">
-                {" "}
-                <FiMail />
-              </span>{" "}
+                <FiMail style={{ color: backgroundColors.emerald }} />
+              </span>
               <span className="px-2">mr7aali@gmail.com</span>
             </p>
             <button
               type="submit"
-              // style={{ border: "3px solid #111" }}
-
-              style={{ border: "2px solid #111" }}
-              className="no-underline w-full lg:w-auto  py-2 px-3 lg:py-3 lg:px-5 text-[15px] lg:text-[18px]  hover:bg-slate-400 cursor-pointer bg-slate-300  text-center flex items-center justify-center font-semibold uppercase"
+              className="no-underline w-full lg:w-auto py-2 px-3 lg:py-3 lg:px-5 text-[15px] lg:text-[18px] cursor-pointer text-center flex items-center justify-center font-semibold uppercase"
+              style={{
+                borderImage: `linear-gradient(45deg, ${backgroundColors.emerald}, ${backgroundColors.blue}) 1`,
+                borderWidth: "2px",
+                background: `linear-gradient(45deg, ${backgroundColors.indigo}, ${backgroundColors.pink})`,
+                color: "#ffffff",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.background = `linear-gradient(45deg, ${backgroundColors.pink}, ${backgroundColors.amber})`)
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.background = `linear-gradient(45deg, ${backgroundColors.indigo}, ${backgroundColors.pink})`)
+              }
             >
-              Hit Me Up{" "}
-              <span className="px-1 text-[18px] text-[#7843e9] mt-1 ml-2">
+              Hit Me Up
+              <span
+                className="px-1 text-[18px] mt-1 ml-2"
+                style={{ color: backgroundColors.amber }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.color = backgroundColors.emerald)
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.color = backgroundColors.amber)
+                }
+              >
                 <BsRocketTakeoff />
               </span>
             </button>
           </div>
         </form>
-
-        {/* //! form end */}
       </div>
     </div>
   );
