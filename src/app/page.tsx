@@ -1,9 +1,7 @@
 // import Expertise2 from "@/components/HomePage/Expertise2";
-"use client";
+// "use client";
 import Project from "@/components/HomePage/Project";
 import SectionDevider from "@/components/Sheared/Devider";
-import { motion } from "framer-motion";
-
 import dynamic from "next/dynamic";
 import LoadingPage from "./loading";
 const AboutMe = dynamic(() => import("@/components/HomePage/AboutMe"));

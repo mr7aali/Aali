@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const LoadingPage = () => {
   return (
-    <div className="flex items-center justify-center w-full h-screen">
+    <div className="flex flex-col items-center justify-center w-full h-screen">
       <div className="relative flex items-center justify-center">
         <div
           style={{
@@ -19,6 +19,9 @@ const LoadingPage = () => {
           alt="Loading..."
         />
       </div>
+      <p className="mt-[20px] text-lg font-medium text-center text-gray-700 animate-pulse">
+        Almost there...
+      </p>
     </div>
   );
 };
