@@ -241,7 +241,8 @@ const HeroSection: React.FC = () => {
                       ? "none"
                       : "translate(-10px, 10px) rotate(-5deg)",
                     zIndex: 1,
-                    backgroundImage: "url('/images/me/pic2.jpg')",
+                    backgroundImage:
+                      "url('https://i.ibb.co/FLNm7gYL/pic2-2-11zon.jpg')",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                   }}
@@ -259,7 +260,8 @@ const HeroSection: React.FC = () => {
                       ? "none"
                       : "translate(10px, -10px) rotate(5deg)",
                     zIndex: 1,
-                    backgroundImage: "url('/images/me/pic1.jpg')",
+                    backgroundImage:
+                      "url('https://i.ibb.co/SXz2TZSp/pic1-1-11zon.jpg')",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                   }}
@@ -272,7 +274,8 @@ const HeroSection: React.FC = () => {
                 initial="hidden"
                 animate={isSpread ? "spread" : "stacked"}
                 style={{
-                  backgroundImage: "url('/images/me/pic3.jpg')",
+                  backgroundImage:
+                    "url('https://i.ibb.co/Vpq9Sqrn/pic3-3-11zon.jpg')",
                   boxShadow:
                     "0 4px 16px rgba(0, 0, 0, 0.2), 0 0 20px rgba(79, 70, 229, 0.2)",
                   zIndex: 2,
