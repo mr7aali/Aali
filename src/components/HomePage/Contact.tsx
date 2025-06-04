@@ -206,7 +206,7 @@ const ContactWithMe = () => {
           </div>
           <div className="flex items-center w-full">
             <p
-              className="flex-1 text-[18px] font-mono flex items-center"
+              className="flex-1 text-[14px] sm:text-[18px] font-mono flex items-center"
               style={{ color: backgroundColors.emerald }}
               onMouseEnter={(e) =>
                 (e.currentTarget.style.color = backgroundColors.pink)
@@ -222,7 +222,7 @@ const ContactWithMe = () => {
             </p>
             <button
               type="submit"
-              className="no-underline w-full lg:w-auto py-2 px-3 lg:py-3 lg:px-5 text-[15px] lg:text-[18px] cursor-pointer text-center flex items-center justify-center font-semibold uppercase"
+              className="no-underline w-[120px] sm:w-full lg:w-auto py-2 px-3 lg:py-3 lg:px-5 text-[12px] sm:text-[15px] lg:text-[18px] cursor-pointer text-center flex items-center justify-center font-semibold uppercase"
               style={{
                 borderImage: `linear-gradient(45deg, ${backgroundColors.emerald}, ${backgroundColors.blue}) 1`,
                 borderWidth: "2px",
@@ -238,7 +238,7 @@ const ContactWithMe = () => {
             >
               Hit Me Up
               <span
-                className="px-1 text-[18px] mt-1 ml-2"
+                className="px-1 text-[14px] sm:text-[18px] mt-1 ml-2"
                 style={{ color: backgroundColors.amber }}
                 onMouseEnter={(e) =>
                   (e.currentTarget.style.color = backgroundColors.emerald)
