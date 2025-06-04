@@ -121,7 +121,7 @@ const Header = () => {
     },
     {
       Icon: InstagramOutlined,
-      path: "https://www.instagram.com/mr7aali/",
+      path: "https://www.instagram.com/sheikh7aali/",
       label: "Instagram",
       baseColor: backgroundColors.red,
       hoverColor: backgroundColors.blue,
@@ -160,11 +160,11 @@ const Header = () => {
                 initial="hidden"
                 animate="visible"
                 variants={logoLetterVariants}
-                style={{ color: backgroundColors.amber }}
-                whileHover={{ scale: 1.2, color: backgroundColors.red }}
+                style={{ color: backgroundColors.blue }}
+                whileHover={{ scale: 1.2, color: backgroundColors.indigo }}
                 transition={{ duration: 0.2 }}
               >
-                {letter}
+                <i> {letter}</i>
               </motion.span>
             ))}
           </motion.div>

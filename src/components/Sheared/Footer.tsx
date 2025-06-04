@@ -68,11 +68,11 @@ const Footer = () => {
               </a>
             </motion.div>
             <motion.p
-              className="text-sm text-transparent bg-gradient-to-r from-indigo-500 to-blue-500 bg-clip-text"
+              className="font-sans text-sm text-transparent bg-gradient-to-r from-indigo-500 to-blue-500 bg-clip-text"
               variants={itemVariants}
               custom={1}
             >
-              © 2025 LOKKEE STUDIOS
+              <i> © 2025 Sheikh Aali</i>
             </motion.p>
           </div>
 
