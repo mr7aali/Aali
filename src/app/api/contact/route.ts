@@ -1,35 +1,27 @@
-
 // import { transporter } from "@/utils/nodemailer";
 import nodemailer from "nodemailer";
 export async function GET(request: Request) {
-    return Response.json({ server: "server is runnig" })
-
-
-    
+  return Response.json({ server: "server is runnig" });
 }
 export async function POST(request: Request) {
-    const email = process.env.EMAIL;
-    const pass = process.env.PASS;
+  const email = process.env.EMAIL;
+  const pass = process.env.PASS;
 
-    try {
-        const data = await request.json();
+  try {
+    const data = await request.json();
 
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      // service: "gmail",
+      auth: {
+        user: email,
+        pass: pass,
+      },
+    });
 
-
-
-
-        const transporter = nodemailer.createTransport({
-            host: "smtp.gmail.com",
-            port: 465,
-            secure: true,
-            // service: "gmail",
-            auth: {
-                user: email,
-                pass: pass
-            }
-        });
-
-        const htmlEmailBody = `
+    const htmlEmailBody = `
         <!DOCTYPE html>
         <html>
         <head>
@@ -46,28 +38,15 @@ export async function POST(request: Request) {
         </html>
     `;
 
-
-
-
-        const result = await transporter.sendMail({
-
-
-            from: data.email,
-            to: process.env.EMAIL,
-            subject: `${data.name} have send you mail with ${data.email} address.`,
-            text: data.message,
-            html: htmlEmailBody
-        })
-        return Response.json({ success: true });
-
-
-    } catch (err) {
-        console.log(err);
-        return Response.json({ success: false })
-    }
-
-
-
-
-
+    const result = await transporter.sendMail({
+      from: data.email,
+      to: process.env.EMAIL,
+      subject: `${data.name} have send you mail with ${data.email} address.`,
+      text: data.message,
+      html: htmlEmailBody,
+    });
+    return Response.json({ success: true });
+  } catch (err) {
+    return Response.json({ success: false });
+  }
 }
