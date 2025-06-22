@@ -6,7 +6,7 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   const email = process.env.EMAIL;
   const pass = process.env.PASS;
-
+  console.log(email, pass);
   try {
     const data = await request.json();
 
