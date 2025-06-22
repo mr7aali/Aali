@@ -14,7 +14,7 @@ interface IFormInputs {
 
 type SubmissionState = "idle" | "loading" | "success" | "error";
 
-const ContactWithMe = () => {
+const ContactForm = () => {
   const [submissionState, setSubmissionState] =
     useState<SubmissionState>("idle");
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -364,4 +364,4 @@ const ContactWithMe = () => {
   );
 };
 
-export default ContactWithMe;
+export default ContactForm;
