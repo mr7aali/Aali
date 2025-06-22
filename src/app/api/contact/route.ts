@@ -6,15 +6,14 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   const email = process.env.EMAIL;
   const pass = process.env.PASS;
-  console.log("EMAIL:", email ? "Set (Email)" : "Not set");
-  console.log("PASS:", pass ? "Set {pass}" : "Not set");
+
   if (!email || !pass) {
     return Response.json({
       success: false,
       message: "Email or password not set",
     });
   }
-  console.log(email, pass);
+
   try {
     const data = await request.json();
 
@@ -121,6 +120,7 @@ export async function POST(request: Request) {
     });
     return Response.json({ success: true });
   } catch (err) {
+    console.error("Error sending email:", err);
     return Response.json({ success: false });
   }
 }

@@ -107,15 +107,15 @@ const HeroSection: React.FC = () => {
   // 2D canvas skill text effect
   useEffect(() => {
     if (!canvasRef.current) {
-      console.error("HeroSection: Canvas ref is not available");
+      // console.error("HeroSection: Canvas ref is not available");
       return;
     }
-    console.log("HeroSection: Canvas ref is available");
+    // console.log("HeroSection: Canvas ref is available");
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     if (!ctx) {
-      console.error("HeroSection: 2D context is not available");
+      // console.error("HeroSection: 2D context is not available");
       return;
     }
 
