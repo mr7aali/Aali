@@ -6,7 +6,8 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   const email = process.env.EMAIL;
   const pass = process.env.PASS;
-
+  console.log("EMAIL:", email ? "Set (Email)" : "Not set");
+  console.log("PASS:", pass ? "Set {pass}" : "Not set");
   if (!email || !pass) {
     return Response.json({
       success: false,
