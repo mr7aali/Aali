@@ -79,7 +79,7 @@ const Project = () => {
   return (
     <motion.section
       id="portfolio"
-      className="relative px-4 py-12 overflow-hidden md:px-6 md:py-16"
+      className="overflow-hidden relative px-4 py-12 md:px-6 md:py-16"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
@@ -105,7 +105,7 @@ const Project = () => {
           >
             Recent Projects
           </h1>
-          <p className="max-w-2xl mx-auto mt-4 text-base text-gray-600 md:text-lg">
+          <p className="mx-auto mt-4 max-w-2xl text-base text-gray-600 md:text-lg">
             Discover my latest works, reflecting my skills and passion for
             crafting innovative web solutions.
           </p>
@@ -144,29 +144,14 @@ const Project = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          {/* <motion.a
-            href="#projects"
-            className="inline-block px-6 py-3 text-sm font-medium text-white rounded-lg shadow-sm hover:shadow-md"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            style={{ backgroundColor: backgroundColors[2] }}
-          >
-            View All Projects
-          </motion.a> */}
           <motion.div
-            className="flex flex-col justify-center gap-4 mt-10 sm:flex-row"
+            className="flex flex-col gap-4 justify-center mt-10 sm:flex-row"
             variants={textVariants}
           >
-            {/* <Link
-            href="#CONTACT"
-            className="inline-block px-6 py-3 font-semibold text-white transition-all duration-300 transform bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-700 hover:-translate-y-1 hover:shadow-lg"
-          >
-            Connect with Me
-          </Link> */}
             <a
               target="_blank"
               href="https://drive.google.com/file/d/1WBsVIWXOKahIR3xDql8yvpgeKAsdATeN/view?usp=drive_link"
-              className="inline-block px-6 py-3 font-semibold text-indigo-600 transition-all duration-300 transform bg-white border border-indigo-200 rounded-lg shadow-md hover:bg-gray-100 hover:-translate-y-1 hover:shadow-lg"
+              className="inline-block px-6 py-3 font-semibold text-indigo-600 bg-white rounded-lg border border-indigo-200 shadow-md transition-all duration-300 transform hover:bg-gray-100 hover:-translate-y-1 hover:shadow-lg"
             >
               Explore My CV
             </a>

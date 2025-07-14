@@ -161,7 +161,10 @@ const AboutMe = () => {
       transition: { duration: 0.2 },
     },
   };
-
+  const textVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
   // Colors from Expertise2
   const highlightColors = [
     "#4f46e5",
@@ -189,7 +192,7 @@ const AboutMe = () => {
         >
           <motion.h1
             variants={itemVariants}
-            className="mt-4 font-serif text-3xl font-bold text-transparent md:text-5xl bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text"
+            className="mt-4 font-serif text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500 md:text-5xl"
           >
             About Me
           </motion.h1>
@@ -259,7 +262,7 @@ const AboutMe = () => {
               reach out if you have an exciting role that aligns with my
               expertise.
             </p>
-            <motion.a
+            {/* <motion.a
               href="#contact"
               variants={itemVariants}
               whileHover={{
@@ -271,7 +274,19 @@ const AboutMe = () => {
               style={{ animation: "pulse 2s infinite" }}
             >
               Contact Me
-            </motion.a>
+            </motion.a> */}
+
+            <motion.div
+              className="flex flex-col gap-4 mt-10 sm:flex-row"
+              variants={textVariants}
+            >
+              <a
+                href="#contact"
+                className="inline-block px-6 py-3 font-semibold text-white transition-all duration-300 transform bg-indigo-600 border border-indigo-200 rounded-lg shadow-md hover:-translate-y-1 hover:shadow-lg"
+              >
+                Contact Me
+              </a>
+            </motion.div>
           </motion.div>
 
           {/* Skills Section */}
