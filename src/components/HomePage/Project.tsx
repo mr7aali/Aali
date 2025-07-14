@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import ProjectCard from "../card/ProjectCard";
 import useParticleBackground from "@/utils/useParticleBackground";
 import Link from "next/link";
+import { HeroSectionData, projects } from "../../../data";
 // import useParticleBackground from "../hooks/useParticleBackground";
 
 // Animation variants
@@ -36,36 +37,6 @@ const textVariants = {
 const Project = () => {
   const canvasRef = useParticleBackground();
 
-  const projects = [
-    {
-      title: "E-commerce Full-stack Website",
-      subtitle: "Start Tech",
-      description:
-        "A fully functional e-commerce platform with React, Next.js, Node.js, and MongoDB, featuring secure payments and responsive design.",
-      imageLink:
-        "https://i.ibb.co/bNp212J/Web-capture-6-12-2023-03911-localhost.jpg",
-      skills: ["React", "NextJs", "NodeJs", "MongoDB", "TailwindCSS"],
-    },
-    {
-      title: "Portfolio Website",
-      subtitle: "Personal Project",
-      description:
-        "A modern portfolio showcasing my skills and projects, built with Next.js, Tailwind CSS, and Framer Motion for dynamic animations.",
-      imageLink:
-        "https://www.adhamdannaway.com/wp-content/uploads/2022/12/feature-ui-design-book.jpg",
-      skills: ["NextJs", "TypeScript", "TailwindCSS", "React"],
-    },
-    {
-      title: "Task Management App",
-      subtitle: "Freelance Work",
-      description:
-        "A task management application with real-time updates, built using React, Firebase, and TypeScript for efficient collaboration.",
-      imageLink:
-        "https://www.adhamdannaway.com/wp-content/uploads/2022/12/feature-ui-design-book.jpg",
-      skills: ["React", "TypeScript", "GitHub"],
-    },
-  ];
-
   // Color palette
   const backgroundColors = [
     "#4f46e5", // Indigo
@@ -79,7 +50,7 @@ const Project = () => {
   return (
     <motion.section
       id="portfolio"
-      className="overflow-hidden relative px-4 py-12 md:px-6 md:py-16"
+      className="relative px-4 py-12 overflow-hidden md:px-6 md:py-16"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
@@ -105,7 +76,7 @@ const Project = () => {
           >
             Recent Projects
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-base text-gray-600 md:text-lg">
+          <p className="max-w-2xl mx-auto mt-4 text-base text-gray-600 md:text-lg">
             Discover my latest works, reflecting my skills and passion for
             crafting innovative web solutions.
           </p>
@@ -118,22 +89,25 @@ const Project = () => {
           viewport={{ once: true }}
         >
           {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              custom={index}
-              variants={cardVariants}
-              whileHover="hover"
-              className="group"
-            >
-              <ProjectCard
-                title={project.title}
-                subtitle={project.subtitle}
-                description={project.description}
-                imageLink={project.imageLink}
-                accentColor={backgroundColors[index % backgroundColors.length]}
-                skills={project.skills}
-              />
-            </motion.div>
+            <Link href={project.projectLink} key={index} target="_blank">
+              <motion.div
+                className="group"
+                variants={cardVariants}
+                custom={index}
+                whileHover="hover"
+              >
+                <ProjectCard
+                  title={project.title}
+                  subtitle={project.subtitle}
+                  description={project.description}
+                  imageLink={project.imageLink}
+                  skills={project.skills}
+                  accentColor={
+                    backgroundColors[index % backgroundColors.length]
+                  }
+                />
+              </motion.div>
+            </Link>
           ))}
         </motion.div>
 
@@ -145,13 +119,13 @@ const Project = () => {
           viewport={{ once: true }}
         >
           <motion.div
-            className="flex flex-col gap-4 justify-center mt-10 sm:flex-row"
+            className="flex flex-col justify-center gap-4 mt-10 sm:flex-row"
             variants={textVariants}
           >
             <a
               target="_blank"
-              href="https://drive.google.com/file/d/1WBsVIWXOKahIR3xDql8yvpgeKAsdATeN/view?usp=drive_link"
-              className="inline-block px-6 py-3 font-semibold text-indigo-600 bg-white rounded-lg border border-indigo-200 shadow-md transition-all duration-300 transform hover:bg-gray-100 hover:-translate-y-1 hover:shadow-lg"
+              href={HeroSectionData.cv}
+              className="inline-block px-6 py-3 font-semibold text-indigo-600 transition-all duration-300 transform bg-white border border-indigo-200 rounded-lg shadow-md hover:bg-gray-100 hover:-translate-y-1 hover:shadow-lg"
             >
               Explore My CV
             </a>

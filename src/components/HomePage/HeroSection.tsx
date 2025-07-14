@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { HeroSectionData, skills } from "../../../data";
 import useParticleBackground from "@/utils/useParticleBackground";
-// import useParticleBackground from "./useParticleBackground";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -197,7 +196,7 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <section className="flex overflow-hidden relative justify-center items-center py-12 bg-transparent sm:py-20">
+    <section className="relative flex items-center justify-center py-12 overflow-hidden bg-transparent sm:py-20">
       <canvas
         ref={particleCanvasRef}
         className="absolute inset-0 z-[5] pointer-events-none"
@@ -210,7 +209,7 @@ const HeroSection: React.FC = () => {
       />
       <motion.div
         id="if-i-hover-then-the-functionality-will-happanes"
-        className="relative z-10 px-4 mx-auto max-w-5xl sm:px-6 lg:px-8"
+        className="relative z-10 max-w-5xl px-4 mx-auto sm:px-6 lg:px-8"
         onHoverStart={handleContainerHoverStart}
         onHoverEnd={handleContainerHoverEnd}
         onTouchStart={handleContainerTouchStart}
@@ -223,12 +222,12 @@ const HeroSection: React.FC = () => {
           variants={containerVariants}
         >
           <motion.div
-            className="flex relative justify-center mb-8"
+            className="relative flex justify-center mb-8"
             initial="hidden"
             animate="visible"
             style={{ minHeight: "16rem" }}
           >
-            <div className="flex justify-center items-center mt-12 w-full">
+            <div className="flex items-center justify-center w-full mt-12">
               <AnimatePresence>
                 <motion.div
                   className="absolute w-64 h-64 rounded-lg shadow-md cursor-pointer bg-red-950"
@@ -300,33 +299,34 @@ const HeroSection: React.FC = () => {
           </motion.div>
 
           <motion.p
-            className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-gray-600 sm:text-xl"
+            className="max-w-3xl mx-auto mt-6 text-lg leading-relaxed text-gray-600 sm:text-xl"
             variants={textVariants}
           >
             {HeroSectionData.decription}
           </motion.p>
 
           <motion.div
-            className="flex flex-col gap-4 justify-center mt-10 sm:flex-row"
+            className="flex flex-col justify-center gap-4 mt-10 sm:flex-row"
             variants={textVariants}
           >
             <Link
               href="#CONTACT"
-              className="inline-block px-6 py-3 font-semibold text-white bg-indigo-600 rounded-lg shadow-md transition-all duration-300 transform hover:bg-indigo-700 hover:-translate-y-1 hover:shadow-lg"
+              className="inline-block px-6 py-3 font-semibold text-white transition-all duration-300 transform bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-700 hover:-translate-y-1 hover:shadow-lg"
             >
               Connect with Me
             </Link>
             <a
               target="_blank"
-              href="https://drive.google.com/file/d/1WBsVIWXOKahIR3xDql8yvpgeKAsdATeN/view?usp=drive_link"
-              className="inline-block px-6 py-3 font-semibold text-indigo-600 bg-white rounded-lg border border-indigo-200 shadow-md transition-all duration-300 transform hover:bg-gray-100 hover:-translate-y-1 hover:shadow-lg"
+              href={HeroSectionData.cv}
+              // href="https://drive.google.com/file/d/1WBsVIWXOKahIR3xDql8yvpgeKAsdATeN/view?usp=drive_link"
+              className="inline-block px-6 py-3 font-semibold text-indigo-600 transition-all duration-300 transform bg-white border border-indigo-200 rounded-lg shadow-md hover:bg-gray-100 hover:-translate-y-1 hover:shadow-lg"
             >
               Explore My CV
             </a>
           </motion.div>
         </motion.div>
       </motion.div>
-      <div className="absolute inset-0 bg-gradient-to-r rounded-xl opacity-0 transition-opacity duration-300 from-indigo-500/10 to-blue-500/10 group-hover:opacity-100" />
+      <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-gradient-to-r rounded-xl from-indigo-500/10 to-blue-500/10 group-hover:opacity-100" />
     </section>
   );
 };

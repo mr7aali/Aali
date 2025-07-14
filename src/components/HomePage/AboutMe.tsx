@@ -262,19 +262,6 @@ const AboutMe = () => {
               reach out if you have an exciting role that aligns with my
               expertise.
             </p>
-            {/* <motion.a
-              href="#contact"
-              variants={itemVariants}
-              whileHover={{
-                scale: 1.05,
-                backgroundImage: "linear-gradient(to right, #4f46e5, #3b82f6)",
-              }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-block px-6 py-3 mt-4 font-semibold text-white transition-colors rounded-lg shadow-md bg-gradient-to-r from-indigo-600 to-blue-500 hover:shadow-lg"
-              style={{ animation: "pulse 2s infinite" }}
-            >
-              Contact Me
-            </motion.a> */}
 
             <motion.div
               className="flex flex-col gap-4 mt-10 sm:flex-row"

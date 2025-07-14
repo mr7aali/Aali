@@ -10,6 +10,7 @@ import {
   SiTailwindcss,
 } from "react-icons/si";
 import { Tooltip } from "antd";
+import Link from "next/link";
 
 // Define ProjectCard props
 interface ProjectCardProps {
@@ -60,13 +61,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       }}
     >
       {/* Image */}
+
       <div className="relative w-full h-36 sm:h-44">
         <Image
           src={imageLink}
           alt={title}
           fill
           style={{ objectFit: "cover" }}
-          className="transition-transform duration-500 group-hover:scale-105"
+          className="transition-transform duration-500 group-hover:scale-105 h-36"
         />
         <div
           className="absolute inset-0 transition-opacity duration-300"
@@ -79,7 +81,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       {/* Content */}
       <div className="p-4 sm:p-5">
         <h3
-          className="font-serif text-base sm:text-lg font-bold group-hover:text-[var(--accent-dark)]"
+          className="font-serif text-base  sm:text-lg font-bold group-hover:text-[var(--accent-dark)]"
           style={
             {
               "--accent-color": accentColor,

@@ -7,6 +7,7 @@ export const HeroSectionData = {
   title: "Hey, I'm",
   name: "Sheikh Aali",
   designation: "Full Stack Developer",
+  cv: "https://drive.google.com/file/d/1Tg2BWlptX8xEhaYqdtQ0TQnsBcno_Xkb/view?usp=sharing",
   decription:
     "Based in Dhaka, Bangladesh 📍, Im a passionate developer crafting seamless, dynamic web experiences. From sleek e-commerce platformsto interactive applications, I turn ideas into reality. Dive into my portfolio and let’s create something extraordinary together!",
 };
@@ -83,5 +84,35 @@ export const ExpertiseItemsData = [
     description:
       "Adept at using Git and GitHub for version control, enabling efficient collaboration and code management. I streamline workflows and maintain clean, organized repositories for team projects.",
     Icon: FaGithub,
+  },
+];
+
+export const projects = [
+  {
+    title: "E-commerce Full-stack Website",
+    subtitle: "Start Tech",
+    description:
+      "A fully functional e-commerce platform with React, Next.js, Node.js, and MongoDB, featuring secure payments and responsive design.",
+    imageLink: "https://i.ibb.co/zWF6CvCF/star-tech-optimized.png",
+    skills: ["React", "NextJs", "NodeJs", "MongoDB", "TailwindCSS"],
+    projectLink: "https://github.com/mr7aali/star-tech",
+  },
+  {
+    title: "Full Stack Project  - Food Ordering website",
+    subtitle: "Slice Savvy",
+    description:
+      "A full-stack food ordering website built with React, Next.js, Node.js, and MongoDB, featuring user authentication and real-time order tracking.",
+    imageLink: "https://i.ibb.co/LX1by47Z/chatbot-sss-1-optimized.png",
+    skills: ["NextJs", "TypeScript", "TailwindCSS", "React"],
+    projectLink: "https://github.com/mr7aali/chatbot",
+  },
+  {
+    title: "Fontend Project - Portfolio Website",
+    subtitle: "Freelance Work",
+    description:
+      "I make this website for my Client.Where is showcase his skills and projects.I used nextjs, typescript and tailwindcss",
+    imageLink: "https://i.ibb.co/kV8Ws6LC/Pasted-image-optimized.png",
+    skills: ["React", "TypeScript", "GitHub"],
+    projectLink: "https://github.com/mr7aali/ek_portfolio",
   },
 ];
