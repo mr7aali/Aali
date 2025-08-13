@@ -1,5 +1,5 @@
 // import Expertise2 from "@/components/HomePage/Expertise2";
-// "use client";
+"use client";
 import Project from "@/components/HomePage/Project";
 import SectionDevider from "@/components/Sheared/Devider";
 import dynamic from "next/dynamic";
