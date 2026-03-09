@@ -1,3 +1,5 @@
+import HeroGlobe from "@/components/HeroGlobe";
+
 export default function Hero() {
   return (
     <section id="hero">
@@ -8,11 +10,13 @@ export default function Hero() {
           <br />
           <span className="hero-name-italic">Ali</span>
         </h1>
-        <p className="hero-role">Full Stack Developer &mdash; Dhaka, Bangladesh</p>
+        <p className="hero-role">
+          Full Stack Developer &mdash; Dhaka, Bangladesh
+        </p>
         <p className="hero-desc">
-          Building scalable web applications with a focus on clean architecture, real-time systems,
-          and pixel-perfect interfaces. 3+ years crafting products at Rokomari, CodenVibe &amp;
-          Betopia Group.
+          Building scalable web applications with a focus on clean architecture,
+          real-time systems, and pixel-perfect interfaces. 3+ years crafting
+          products at Rokomari, CodenVibe &amp; Betopia Group.
         </p>
         <div className="hero-actions">
           <a href="#projects" className="btn-primary">
@@ -29,13 +33,26 @@ export default function Hero() {
           <a href="tel:+8801967519057" className="contact-item">
             <span>&#8599;</span> +880 1967519057
           </a>
-          <a href="https://linkedin.com/in/mr7aali" className="contact-item" target="_blank" rel="noreferrer">
+          <a
+            href="https://linkedin.com/in/mr7aali"
+            className="contact-item"
+            target="_blank"
+            rel="noreferrer"
+          >
             <span>in</span> linkedin.com/in/mr7aali
           </a>
-          <a href="https://github.com/mr7aali" className="contact-item" target="_blank" rel="noreferrer">
+          <a
+            href="https://github.com/mr7aali"
+            className="contact-item"
+            target="_blank"
+            rel="noreferrer"
+          >
             <span>&#9672;</span> github.com/mr7aali
           </a>
         </div>
+      </div>
+      <div className="hero-visual">
+        <HeroGlobe />
       </div>
       <div className="hero-scroll">
         <div className="scroll-line" />
