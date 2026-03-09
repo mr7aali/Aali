@@ -5,7 +5,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 const EARTH_RADIUS = 1.34;
-const BANGLADESH = { lat: 23.685, lon: 90.3563 };
+const BANGLADESH = { lat: 24, lon: 180 };
 
 function latLonToVector3(lat: number, lon: number, radius: number) {
   const phi = THREE.MathUtils.degToRad(90 - lat);
