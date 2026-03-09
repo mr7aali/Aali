@@ -75,6 +75,88 @@ main {
   width: 100% !important;
 }
 
+.page-loader {
+  align-items: center;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(0, 229, 255, 0.08), transparent 50%),
+    linear-gradient(180deg, rgba(10, 10, 15, 0.96), rgba(10, 10, 15, 0.98));
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  inset: 0;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  transition: opacity 0.5s ease;
+  z-index: 120000;
+}
+
+.page-loader.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.loader-clock {
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  border-radius: 50%;
+  box-shadow: 0 0 30px rgba(0, 229, 255, 0.12);
+  height: 84px;
+  position: relative;
+  width: 84px;
+}
+
+.loader-clock::before {
+  border: 1px solid rgba(123, 97, 255, 0.25);
+  border-radius: 50%;
+  content: "";
+  inset: 8px;
+  position: absolute;
+}
+
+.loader-dot {
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.7);
+  height: 8px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  z-index: 2;
+}
+
+.loader-hand {
+  border-radius: 999px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform-origin: bottom center;
+}
+
+.loader-hand--minute {
+  animation: clockTurn 2.4s linear infinite;
+  background: var(--accent2);
+  height: 22px;
+  width: 2px;
+}
+
+.loader-hand--second {
+  animation: clockTurn 0.9s linear infinite;
+  background: var(--accent);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.45);
+  height: 28px;
+  width: 1px;
+}
+
+.loader-label {
+  color: var(--text2);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
 .cursor {
   background: var(--accent);
   border-radius: 50%;
@@ -1082,6 +1164,15 @@ footer {
 
   50% {
     box-shadow: 0 0 40px rgba(0, 229, 255, 0.4);
+  }
+}
+
+@keyframes clockTurn {
+  from {
+    transform: translate(-50%, -100%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -100%) rotate(360deg);
   }
 }
 
