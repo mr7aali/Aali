@@ -94,8 +94,12 @@ export default function HeroGlobe() {
 
     const textureLoader = new THREE.TextureLoader();
     const earthTexture = textureLoader.load("/textures/earth_atmos_2048.jpg");
-    const earthNormalTexture = textureLoader.load("/textures/earth_normal_2048.jpg");
-    const earthSpecularTexture = textureLoader.load("/textures/earth_specular_2048.jpg");
+    const earthNormalTexture = textureLoader.load(
+      "/textures/earth_normal_2048.jpg",
+    );
+    const earthSpecularTexture = textureLoader.load(
+      "/textures/earth_specular_2048.jpg",
+    );
     const cloudTexture = textureLoader.load("/textures/earth_clouds_1024.png");
     earthTexture.colorSpace = THREE.SRGBColorSpace;
     cloudTexture.colorSpace = THREE.SRGBColorSpace;
@@ -132,7 +136,7 @@ export default function HeroGlobe() {
           opacity: 0.4,
           blending: THREE.AdditiveBlending,
           depthWrite: false,
-        })
+        }),
       );
     if (clouds) {
       globeGroup.add(clouds);
@@ -163,11 +167,15 @@ export default function HeroGlobe() {
         side: THREE.BackSide,
         transparent: true,
         depthWrite: false,
-      })
+      }),
     );
     scene.add(atmosphere);
 
-    const bangladeshVector = latLonToVector3(BANGLADESH.lat, BANGLADESH.lon, EARTH_RADIUS);
+    const bangladeshVector = latLonToVector3(
+      BANGLADESH.lat,
+      BANGLADESH.lon,
+      EARTH_RADIUS,
+    );
     globeGroup.rotation.y = Math.atan2(-bangladeshVector.x, bangladeshVector.z);
 
     const pinGroup = new THREE.Group();
@@ -178,7 +186,7 @@ export default function HeroGlobe() {
         emissive: "#a62343",
         emissiveIntensity: 0.6,
         roughness: 0.35,
-      })
+      }),
     );
     pinStem.position.y = 0.11;
 
@@ -189,7 +197,7 @@ export default function HeroGlobe() {
         emissive: "#ff3358",
         emissiveIntensity: 0.9,
         roughness: 0.25,
-      })
+      }),
     );
     pinHead.position.y = 0.22;
 
@@ -199,19 +207,33 @@ export default function HeroGlobe() {
       opacity: 0.7,
       side: THREE.DoubleSide,
     });
-    const pinPulse = new THREE.Mesh(new THREE.RingGeometry(0.05, 0.086, 40), pinPulseMaterial);
+    const pinPulse = new THREE.Mesh(
+      new THREE.RingGeometry(0.05, 0.086, 40),
+      pinPulseMaterial,
+    );
     pinPulse.rotation.x = -Math.PI / 2;
     pinPulse.position.y = 0.008;
 
     pinGroup.add(pinStem, pinHead, pinPulse);
-    const pinPosition = latLonToVector3(BANGLADESH.lat, BANGLADESH.lon, EARTH_RADIUS + 0.01);
+    const pinPosition = latLonToVector3(
+      BANGLADESH.lat,
+      BANGLADESH.lon,
+      EARTH_RADIUS + 0.01,
+    );
     pinGroup.position.copy(pinPosition);
-    pinGroup.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), pinPosition.clone().normalize());
+    pinGroup.quaternion.setFromUnitVectors(
+      new THREE.Vector3(0, 1, 0),
+      pinPosition.clone().normalize(),
+    );
     globeGroup.add(pinGroup);
 
-    const pinLabel = createLabelSprite("Bangladesh");
+    const pinLabel = createLabelSprite("Me");
     if (pinLabel) {
-      const labelPosition = latLonToVector3(BANGLADESH.lat, BANGLADESH.lon, EARTH_RADIUS + 0.35);
+      const labelPosition = latLonToVector3(
+        BANGLADESH.lat,
+        BANGLADESH.lon,
+        EARTH_RADIUS + 0.35,
+      );
       pinLabel.position.copy(labelPosition);
       globeGroup.add(pinLabel);
     }
@@ -222,7 +244,7 @@ export default function HeroGlobe() {
         color: "#7b61ff",
         transparent: true,
         opacity: 0.36,
-      })
+      }),
     );
     orbitRing.rotation.x = Math.PI * 0.44;
     orbitRing.rotation.y = Math.PI * 0.12;
@@ -234,7 +256,7 @@ export default function HeroGlobe() {
         color: "#00e5ff",
         transparent: true,
         opacity: 0.24,
-      })
+      }),
     );
     orbitRing2.rotation.x = Math.PI * 0.18;
     orbitRing2.rotation.z = Math.PI * 0.35;
@@ -264,8 +286,14 @@ export default function HeroGlobe() {
     }
 
     const particleGeometry = new THREE.BufferGeometry();
-    particleGeometry.setAttribute("position", new THREE.BufferAttribute(particlePositions, 3));
-    particleGeometry.setAttribute("color", new THREE.BufferAttribute(particleColors, 3));
+    particleGeometry.setAttribute(
+      "position",
+      new THREE.BufferAttribute(particlePositions, 3),
+    );
+    particleGeometry.setAttribute(
+      "color",
+      new THREE.BufferAttribute(particleColors, 3),
+    );
 
     const particleMaterial = new THREE.PointsMaterial({
       blending: THREE.AdditiveBlending,
@@ -324,7 +352,8 @@ export default function HeroGlobe() {
       }
 
       pinPulse.scale.setScalar(1 + 0.25 * (0.5 + 0.5 * Math.sin(elapsed * 3)));
-      pinPulseMaterial.opacity = 0.65 + 0.2 * (0.5 + 0.5 * Math.sin(elapsed * 3));
+      pinPulseMaterial.opacity =
+        0.65 + 0.2 * (0.5 + 0.5 * Math.sin(elapsed * 3));
 
       atmosphere.rotation.y = elapsed * 0.05;
       orbitRing.rotation.z = elapsed * 0.2;
@@ -364,7 +393,9 @@ export default function HeroGlobe() {
       pinPulse.geometry.dispose();
       pinPulseMaterial.dispose();
       if (pinLabel) {
-        ((pinLabel.material as THREE.SpriteMaterial).map as THREE.Texture).dispose();
+        (
+          (pinLabel.material as THREE.SpriteMaterial).map as THREE.Texture
+        ).dispose();
         (pinLabel.material as THREE.Material).dispose();
       }
       earthTexture.dispose();
