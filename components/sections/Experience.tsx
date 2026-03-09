@@ -127,7 +127,7 @@ export default function Experience() {
             <div className="edu-card">
               <div className="edu-degree">B.Sc. in Computer Science</div>
               <div className="edu-school">Bangladesh University of Business &amp; Technology</div>
-              <div className="edu-meta">Expected Dec 2025 · Dhaka, Bangladesh</div>
+              <div className="edu-meta">Expected Dec 2025 - Dhaka, Bangladesh</div>
               <div className="edu-gpa">GPA: 3.30 / 4.00</div>
               <div className="edu-subtitle">Relevant Coursework:</div>
               <div className="edu-courses">
