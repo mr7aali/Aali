@@ -1120,14 +1120,14 @@ footer {
 .footer-inner {
   margin: 0 auto;
   max-width: 1200px;
-  padding: 80px 60px 40px;
+  padding: 64px 60px 32px;
 }
 
 .footer-cta {
   background: linear-gradient(135deg, rgba(0, 229, 255, 0.05), rgba(123, 97, 255, 0.05));
   border: 1px solid rgba(0, 229, 255, 0.1);
-  margin-bottom: 60px;
-  padding: 40px;
+  margin-bottom: 48px;
+  padding: 32px;
   text-align: center;
 }
 
@@ -1149,14 +1149,17 @@ footer {
   color: var(--text2);
   font-size: 0.85rem;
   font-weight: 300;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 28px;
+  max-width: 520px;
 }
 
 .footer-top {
   display: grid;
-  gap: 60px;
+  gap: 48px;
   grid-template-columns: 1.5fr 1fr 1fr;
-  margin-bottom: 60px;
+  margin-bottom: 48px;
 }
 
 .footer-brand .logo {
@@ -1207,7 +1210,7 @@ footer {
   flex-wrap: wrap;
   gap: 16px;
   justify-content: space-between;
-  padding-top: 32px;
+  padding-top: 24px;
 }
 
 .footer-copy {
@@ -1328,6 +1331,15 @@ footer {
     padding: 80px 24px;
   }
 
+  .footer-inner {
+    padding: 56px 24px 28px;
+  }
+
+  .footer-cta {
+    margin-bottom: 40px;
+    padding: 28px 24px;
+  }
+
   .section-title {
     margin-bottom: 40px;
   }
@@ -1412,6 +1424,21 @@ footer {
     grid-template-columns: 1fr;
   }
 
+  .footer-top {
+    margin-bottom: 36px;
+  }
+
+  .footer-bottom {
+    align-items: flex-start;
+    gap: 12px;
+    padding-top: 20px;
+  }
+
+  .footer-socials {
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
   .about-text {
     font-size: 0.92rem;
     line-height: 1.8;
@@ -1449,6 +1476,23 @@ footer {
     padding: 64px 20px;
   }
 
+  .footer-inner {
+    padding: 48px 20px 24px;
+  }
+
+  .footer-cta {
+    margin-bottom: 32px;
+    padding: 24px 18px;
+  }
+
+  .footer-cta h3 {
+    font-size: clamp(1.45rem, 8vw, 1.7rem);
+  }
+
+  .footer-cta p {
+    margin-bottom: 22px;
+  }
+
   .section-label {
     gap: 8px;
     letter-spacing: 0.18em;
@@ -1482,6 +1526,20 @@ footer {
 
   .about-grid {
     gap: 28px;
+  }
+
+  .footer-top {
+    gap: 28px;
+    margin-bottom: 28px;
+  }
+
+  .footer-bottom {
+    padding-top: 18px;
+  }
+
+  .footer-copy,
+  .footer-socials a {
+    font-size: 0.68rem;
   }
 
   .about-stats {
