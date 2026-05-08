@@ -21,6 +21,7 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -29,6 +30,10 @@ body {
   cursor: none;
   font-family: var(--font-body), "DM Mono", monospace;
   overflow-x: hidden;
+}
+
+body.menu-open {
+  overflow: hidden;
 }
 
 body::before {
@@ -284,8 +289,22 @@ header {
   z-index: 1000;
 }
 
+.menu-toggle {
+  align-items: center;
+  background: rgba(0, 229, 255, 0.08);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  border-radius: 999px;
+  color: var(--text);
+  display: none;
+  height: 44px;
+  justify-content: center;
+  padding: 0;
+  width: 44px;
+}
+
 .logo {
   color: var(--text);
+  display: inline-flex;
   font-family: var(--font-heading), "Syne", sans-serif;
   font-size: 1.1rem;
   font-weight: 800;
@@ -1320,11 +1339,66 @@ footer {
 
 @media (max-width: 768px) {
   header {
-    padding: 16px 24px;
+    padding:
+      calc(16px + env(safe-area-inset-top, 0px))
+      max(24px, env(safe-area-inset-right, 24px))
+      16px
+      max(24px, env(safe-area-inset-left, 24px));
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    flex-shrink: 0;
   }
 
   nav {
-    display: none;
+    backdrop-filter: blur(24px);
+    background:
+      linear-gradient(180deg, rgba(10, 10, 15, 0.98), rgba(10, 10, 15, 0.92)),
+      radial-gradient(circle at top right, rgba(0, 229, 255, 0.08), transparent 42%);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.28);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    left: 20px;
+    opacity: 0;
+    padding: 20px;
+    pointer-events: none;
+    position: fixed;
+    right: 20px;
+    top: calc(76px + env(safe-area-inset-top, 0px));
+    transform: translateY(-12px);
+    transition:
+      opacity 0.24s ease,
+      transform 0.24s ease;
+  }
+
+  header.is-open nav,
+  nav.is-open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  nav a,
+  .nav-cta {
+    font-size: 0.78rem !important;
+    line-height: 1.2;
+    padding: 10px 0;
+  }
+
+  nav a::after {
+    bottom: 4px;
+  }
+
+  .nav-cta {
+    justify-content: center;
+    margin-top: 6px;
+    min-height: 44px;
+    padding: 12px 18px;
+    text-align: center;
   }
 
   .section-inner {
@@ -1332,7 +1406,11 @@ footer {
   }
 
   .footer-inner {
-    padding: 56px 24px 28px;
+    padding:
+      56px
+      max(24px, env(safe-area-inset-right, 24px))
+      calc(28px + env(safe-area-inset-bottom, 0px))
+      max(24px, env(safe-area-inset-left, 24px));
   }
 
   .footer-cta {
@@ -1349,7 +1427,11 @@ footer {
     gap: 32px;
     grid-template-columns: 1fr;
     min-height: auto;
-    padding: 96px 24px 72px;
+    padding:
+      calc(96px + env(safe-area-inset-top, 0px))
+      max(24px, env(safe-area-inset-right, 24px))
+      calc(72px + env(safe-area-inset-bottom, 0px))
+      max(24px, env(safe-area-inset-left, 24px));
   }
 
   .hero-content {
@@ -1473,11 +1555,19 @@ footer {
 
 @media (max-width: 560px) {
   .section-inner {
-    padding: 64px 20px;
+    padding:
+      64px
+      max(20px, env(safe-area-inset-right, 20px))
+      64px
+      max(20px, env(safe-area-inset-left, 20px));
   }
 
   .footer-inner {
-    padding: 48px 20px 24px;
+    padding:
+      48px
+      max(20px, env(safe-area-inset-right, 20px))
+      calc(24px + env(safe-area-inset-bottom, 0px))
+      max(20px, env(safe-area-inset-left, 20px));
   }
 
   .footer-cta {
@@ -1504,7 +1594,11 @@ footer {
 
   #hero {
     gap: 28px;
-    padding: 88px 20px 60px;
+    padding:
+      calc(88px + env(safe-area-inset-top, 0px))
+      max(20px, env(safe-area-inset-right, 20px))
+      calc(60px + env(safe-area-inset-bottom, 0px))
+      max(20px, env(safe-area-inset-left, 20px));
   }
 
   .hero-tag {

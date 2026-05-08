@@ -51,6 +51,13 @@ export default function BackgroundCanvas() {
       return;
     }
 
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isCompactViewport = window.matchMedia("(max-width: 768px)").matches;
+
+    if (prefersReducedMotion || isCompactViewport) {
+      return;
+    }
+
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
       65,
