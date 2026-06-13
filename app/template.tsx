@@ -12,8 +12,10 @@ export default function Template({ children }: { children: React.ReactNode }) {
     const finishDuration = 360;
     const startTime = performance.now();
     let finishTimeoutId = 0;
+    let fallbackTimeoutId = 0;
     let hideTimeoutId = 0;
     let frameId = 0;
+    let finishQueued = false;
     let isFinishing = false;
     let finishStartTime = 0;
     let finishFrom = 0;
@@ -50,6 +52,11 @@ export default function Template({ children }: { children: React.ReactNode }) {
     };
 
     const beginFinish = () => {
+      if (finishQueued || isFinishing) {
+        return;
+      }
+
+      finishQueued = true;
       const elapsed = performance.now() - startTime;
       const remaining = Math.max(0, minDuration - elapsed);
       finishTimeoutId = window.setTimeout(() => {
@@ -70,10 +77,13 @@ export default function Template({ children }: { children: React.ReactNode }) {
       window.addEventListener("load", beginFinish, { once: true });
     }
 
+    fallbackTimeoutId = window.setTimeout(beginFinish, minDuration + 900);
+
     return () => {
       window.removeEventListener("load", beginFinish);
       window.cancelAnimationFrame(frameId);
       window.clearTimeout(finishTimeoutId);
+      window.clearTimeout(fallbackTimeoutId);
       window.clearTimeout(hideTimeoutId);
     };
   }, []);

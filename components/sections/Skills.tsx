@@ -5,7 +5,15 @@ const skillGroups = [
   },
   {
     title: "Frameworks & Libraries",
-    items: ["React", "Next.js", "NestJS", "Node.js", "Express.js", "React Native", "Flutter"],
+    items: [
+      "React",
+      "Next.js",
+      "NestJS",
+      "Node.js",
+      "Express.js",
+      "React Native",
+      "Flutter",
+    ],
   },
   {
     title: "Databases & ORMs",
