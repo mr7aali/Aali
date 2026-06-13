@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 const navItems = [
   { href: "#about", label: "About" },
@@ -15,7 +16,9 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const sections = Array.from(document.querySelectorAll<HTMLElement>("section[id]"));
+    const sections = Array.from(
+      document.querySelectorAll<HTMLElement>("section[id]"),
+    );
 
     const handleScroll = () => {
       let current = "";
@@ -61,20 +64,19 @@ export default function Header() {
 
   return (
     <header className={menuOpen ? "is-open" : undefined}>
-      <a className="logo" href="#hero" aria-label="Go to hero section" onClick={closeMenu}>
+      <a
+        className="logo"
+        href="#hero"
+        aria-label="Go to hero section"
+        onClick={closeMenu}
+      >
         S<span>.</span>Sukur Ali
       </a>
-      <button
-        type="button"
-        className="menu-toggle"
-        aria-expanded={menuOpen}
-        aria-controls="primary-navigation"
-        aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-        onClick={() => setMenuOpen((current) => !current)}
+      <nav
+        id="primary-navigation"
+        aria-label="Primary"
+        className={menuOpen ? "is-open" : undefined}
       >
-        {menuOpen ? <X size={20} /> : <Menu size={20} />}
-      </button>
-      <nav id="primary-navigation" aria-label="Primary" className={menuOpen ? "is-open" : undefined}>
         {navItems.map((item) => (
           <a
             key={item.href}
@@ -85,10 +87,29 @@ export default function Header() {
             {item.label}
           </a>
         ))}
-        <a href="mailto:mr7aali@gmail.com" className="nav-cta" onClick={closeMenu}>
+        <a
+          href="mailto:mr7aali@gmail.com"
+          className="nav-cta"
+          onClick={closeMenu}
+        >
           Hire Me
         </a>
       </nav>
+      <div className="header-actions">
+        <ThemeToggle />
+        <button
+          type="button"
+          className="menu-toggle"
+          aria-expanded={menuOpen}
+          aria-controls="primary-navigation"
+          aria-label={
+            menuOpen ? "Close navigation menu" : "Open navigation menu"
+          }
+          onClick={() => setMenuOpen((current) => !current)}
+        >
+          {menuOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
+      </div>
     </header>
   );
 }

@@ -30,7 +30,13 @@ export const metadata: Metadata = {
     "Portfolio of Sheikh Sukur Ali, Full Stack Developer building scalable real-time systems and polished interfaces.",
   manifest: "/manifest.webmanifest",
   applicationName: "Sheikh Sukur Ali",
-  keywords: ["Sheikh Sukur Ali", "Full Stack Developer", "Portfolio", "PWA", "Web App"],
+  keywords: [
+    "Sheikh Sukur Ali",
+    "Full Stack Developer",
+    "Portfolio",
+    "PWA",
+    "Web App",
+  ],
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
@@ -51,12 +57,16 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0f",
-  colorScheme: "dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0f" },
+    { media: "(prefers-color-scheme: light)", color: "#fafbfd" },
+  ],
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
 };
+
+const themeInitScript = `(function(){try{var s=localStorage.getItem('aali-theme');var t=(s==='light'||s==='dark')?s:(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();`;
 
 export default function RootLayout({
   children,
@@ -65,7 +75,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${syne.variable} ${dmMono.variable} ${fraunces.variable}`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
+      <body
+        className={`${syne.variable} ${dmMono.variable} ${fraunces.variable}`}
+      >
         <PwaRegister />
         <BackgroundCanvas />
         <CustomCursor />
