@@ -1616,6 +1616,177 @@ footer {
   z-index: 10;
 }
 
+.scroll-progress-bar {
+  background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+  box-shadow: 0 0 18px color-mix(in srgb, var(--accent) 42%, transparent);
+  height: 3px;
+  left: 0;
+  pointer-events: none;
+  position: fixed;
+  right: 0;
+  top: 0;
+  transform-origin: 0 50%;
+  z-index: 1500;
+}
+
+.scroll-timeline {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  pointer-events: none;
+  position: fixed;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 900;
+}
+
+.scroll-timeline::before {
+  background: color-mix(in srgb, var(--text3) 32%, transparent);
+  bottom: 12px;
+  content: "";
+  left: 5px;
+  position: absolute;
+  top: 12px;
+  width: 1px;
+}
+
+.scroll-timeline-fill {
+  background: linear-gradient(180deg, var(--accent), var(--accent2), var(--accent3));
+  bottom: 12px;
+  left: 5px;
+  position: absolute;
+  top: 12px;
+  transform-origin: 50% 0;
+  width: 1px;
+}
+
+.scroll-timeline a {
+  align-items: center;
+  color: var(--text3);
+  display: flex;
+  font-size: 0.68rem;
+  gap: 10px;
+  letter-spacing: 0;
+  line-height: 1;
+  min-height: 20px;
+  pointer-events: auto;
+  position: relative;
+  transition: color 0.25s ease;
+}
+
+.scroll-timeline-dot {
+  background: var(--bg);
+  border: 1px solid color-mix(in srgb, var(--text3) 56%, transparent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--bg) 86%, transparent);
+  display: block;
+  height: 11px;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+  width: 11px;
+}
+
+.scroll-timeline-label {
+  opacity: 0;
+  text-transform: uppercase;
+  transform: translateX(8px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+  white-space: nowrap;
+}
+
+.scroll-timeline a:hover,
+.scroll-timeline a.is-active {
+  color: var(--accent);
+}
+
+.scroll-timeline a:hover .scroll-timeline-dot,
+.scroll-timeline a.is-active .scroll-timeline-dot {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--bg) 86%, transparent),
+    0 0 18px color-mix(in srgb, var(--accent) 70%, transparent);
+  transform: scale(1.18);
+}
+
+.scroll-timeline a:hover .scroll-timeline-label,
+.scroll-timeline a.is-active .scroll-timeline-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    color 0.3s ease;
+  will-change: opacity, transform;
+}
+
+.scroll-reveal.is-inview {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.timeline-item.scroll-reveal {
+  transform: translate3d(-20px, 18px, 0);
+}
+
+.timeline-item.scroll-reveal.is-inview,
+.timeline-item.visible.scroll-reveal {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.edu-card.scroll-reveal.is-inview:hover {
+  transform: translateX(4px);
+}
+
+.showcase-item.scroll-reveal.is-inview:hover {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 1024px) {
+  .scroll-timeline {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .scroll-reveal,
+  .scroll-reveal.is-inview,
+  .timeline-item.scroll-reveal,
+  .timeline-item.scroll-reveal.is-inview,
+  .timeline-item.visible.scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .scroll-timeline a,
+  .scroll-timeline-dot,
+  .scroll-timeline-label,
+  .scroll-progress-bar {
+    transition: none;
+  }
+}
+
 @keyframes fadeUp {
   from {
     opacity: 0;

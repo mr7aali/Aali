@@ -3,6 +3,7 @@ import { DM_Mono, Fraunces, Syne } from "next/font/google";
 import BackgroundCanvas from "@/components/BackgroundCanvas";
 import CustomCursor from "@/components/CustomCursor";
 import PwaRegister from "@/components/PwaRegister";
+import ScrollTimeline from "@/components/ScrollTimeline";
 import "./globals.css";
 
 const syne = Syne({
@@ -83,6 +84,7 @@ export default function RootLayout({
       >
         <PwaRegister />
         <BackgroundCanvas />
+        <ScrollTimeline />
         <CustomCursor />
         <noscript>
           <style>{`
